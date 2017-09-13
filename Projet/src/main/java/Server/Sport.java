@@ -4,6 +4,8 @@ package Server;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.List;
 
 @Entity
 public class Sport {
@@ -13,6 +15,9 @@ public class Sport {
     private String name;
 
     private String level;
+
+    private List<User> users;
+
 
     public Sport() {
     }
@@ -40,5 +45,14 @@ public class Sport {
 
     public void setLevel(String level) {
         this.level = level;
+    }
+
+    @ManyToMany(mappedBy = "sports")
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

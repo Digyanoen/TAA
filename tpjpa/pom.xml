@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>fr.istic.tp</groupId>
-    <artifactId>tp jpa</artifactId>
+    <artifactId>tpjpa</artifactId>
     <version>0.1-SNAPSHOT</version>
 
     <dependencies>

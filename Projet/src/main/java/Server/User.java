@@ -3,6 +3,8 @@ package Server;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import java.util.List;
 
 @Entity
 public class User {
@@ -11,6 +13,8 @@ public class User {
     private String login;
 
     private String password;
+
+    private List<Sport> sports;
 
     @Id
     public String getLogin() {
@@ -27,5 +31,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @ManyToMany
+    public List<Sport> getSports() {
+        return sports;
+    }
+
+    public void setSports(List<Sport> sports) {
+        this.sports = sports;
     }
 }

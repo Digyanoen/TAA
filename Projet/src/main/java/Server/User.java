@@ -1,8 +1,8 @@
 package Server;
 
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.util.List;
 

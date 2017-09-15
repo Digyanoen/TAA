@@ -2,8 +2,21 @@ package Repository;
 
 import Server.User;
 
-public interface UserDAO {
+public class UserDAO extends DAO<User>{
 
-    // SELECT * from user where id = :id
-    public User findById();
+    public User find(int id) {
+        return null;
+    }
+
+    public boolean create(User o) {
+        return false;
+    }
+
+    public boolean delete(User o) {
+        return false;
+    }
+
+    public boolean update(User o) {
+        return false;
+    }
 }

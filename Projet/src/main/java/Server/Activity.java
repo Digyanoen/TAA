@@ -8,7 +8,7 @@ import javax.persistence.ManyToMany;
 import java.util.List;
 
 @Entity
-public class Sport {
+public class Activity {
 
     private int id;
 
@@ -19,7 +19,7 @@ public class Sport {
     private List<User> users;
 
 
-    public Sport() {
+    public Activity() {
     }
     @Id
     @GeneratedValue
@@ -47,7 +47,7 @@ public class Sport {
         this.level = level;
     }
 
-    @ManyToMany(mappedBy = "sports")
+    @ManyToMany(mappedBy = "activities")
     public List<User> getUsers() {
         return users;
     }

@@ -1,13 +1,24 @@
 package Repository;
 
-import Server.User;
+import Server.Activity;
 
 import java.util.List;
 
-public interface SportDAO {
-    // SELECT * FROM user_sport JOIN sport where user.id = :id
-    public User findAllSportForUser();
+public class SportDAO extends DAO<Activity>{
 
-    // SELECT login from user_sport_ JOIN sport where level = :level
-    public List<User> findAllUserByLevel();
+    public Activity find(int id) {
+        return null;
+    }
+
+    public boolean create(Activity o) {
+        return false;
+    }
+
+    public boolean delete(Activity o) {
+        return false;
+    }
+
+    public boolean update(Activity o) {
+        return false;
+    }
 }

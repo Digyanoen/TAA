@@ -8,15 +8,12 @@ public class UserDAO extends DAO<User>{
         return null;
     }
 
-    public boolean create(User o) {
-        return false;
+    public void create(User o) {
     }
 
-    public boolean delete(User o) {
-        return false;
+    public void delete(User o){
     }
 
-    public boolean update(User o) {
-        return false;
+    public void update(User o) {
     }
 }

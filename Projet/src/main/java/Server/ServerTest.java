@@ -1,5 +1,6 @@
 package Server;
 
+import Repository.ActivityDAO;
 import jpa.EntityManagerHelper;
 
 import javax.persistence.*;
@@ -13,19 +14,19 @@ public class ServerTest {
 
 
 
-        EntityManagerHelper.beginTransaction();
+      //  EntityManagerHelper.beginTransaction();
         try {
 
             Query q1 = manager.createNativeQuery("DELETE FROM USER_ACTIVITY");
             Query q2 = manager.createNativeQuery("DELETE FROM WEATHERCONDITION");
             Query q3 = manager.createNativeQuery("DELETE FROM ACTIVITY");
             Query q4 = manager.createNativeQuery("DELETE FROM USER");
-
+/*
             q1.executeUpdate();
             q2.executeUpdate();
             q3.executeUpdate();
             q4.executeUpdate();
-
+*/
             Activity bowling = new Activity();
             bowling.setName("bowling");
             bowling.setLevel("hardcore");
@@ -51,18 +52,21 @@ public class ServerTest {
 
             bowling.setUsers(list);
 
-            EntityManagerHelper.persist(bowling);
-            EntityManagerHelper.persist(jean);
-            EntityManagerHelper.persist(paul);
-            EntityManagerHelper.persist(jacques);
+            ActivityDAO activityDAO = new ActivityDAO();
+            activityDAO.create(bowling);
+            bowling.setName("nananananana");
+            bowling.setLevel("eeeee");
+            activityDAO.update(bowling);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        EntityManagerHelper.commit();
+
+        EntityManagerHelper.closeEntityManagerFactory();
+        /*EntityManagerHelper.commit();
 
         EntityManagerHelper.closeEntityManager();
-        EntityManagerHelper.closeEntityManagerFactory();
+        EntityManagerHelper.closeEntityManagerFactory(); */
 
     }
 }

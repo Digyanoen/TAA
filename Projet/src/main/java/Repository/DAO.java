@@ -3,8 +3,8 @@ package Repository;
 public abstract class DAO<T> {
 
     public abstract T find(int id);
-    public abstract boolean create(T o);
-    public abstract boolean delete(T o);
-    public abstract boolean update(T o);
+    public abstract void create(T o);
+    public abstract void delete(T o);
+    public abstract void update(T o);
 
 }

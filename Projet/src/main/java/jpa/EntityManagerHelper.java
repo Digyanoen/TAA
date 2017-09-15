@@ -1,8 +1,11 @@
 package jpa;
 
+import Repository.DAO;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class EntityManagerHelper {
 
@@ -49,4 +52,8 @@ public class EntityManagerHelper {
     }
 
     public static void persist(Object o){ getEntityManager().persist(o);}
+
+    public static Query createQuery(String s) {
+        return getEntityManager().createQuery(s);
+    }
 }

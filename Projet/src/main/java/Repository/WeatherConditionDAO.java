@@ -9,15 +9,13 @@ public class WeatherConditionDAO extends DAO<WeatherCondition>{
         return null;
     }
 
-    public boolean create(WeatherCondition o) {
-        return false;
+    public void create(WeatherCondition o) {
     }
 
-    public boolean delete(WeatherCondition o) {
-        return false;
+    public void delete(WeatherCondition o) {
+
     }
 
-    public boolean update(WeatherCondition o) {
-        return false;
+    public void update(WeatherCondition o) {
     }
 }

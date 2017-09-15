@@ -1,9 +1,7 @@
 package Server;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -33,7 +31,7 @@ public class User {
         this.password = password;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     public List<Sport> getSports() {
         return sports;
     }

@@ -1,4 +1,4 @@
-package jpa;
+package Server;
 
 import Server.Sport;
 import Server.User;
@@ -11,7 +11,7 @@ import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JpaTest {
+public class Server {
 
     /**
      * @param args
@@ -35,7 +35,6 @@ public class JpaTest {
             jean.setLogin("jeannotlebo");
             paul.setLogin("poildecarrot");
             jacques.setLogin("jacadiadit");
-
             List<User> list= new ArrayList<User>();
             list.add(jean);
             list.add(jacques);
@@ -46,6 +45,7 @@ public class JpaTest {
             manager.persist(jean);
             manager.persist(paul);
             manager.persist(jacques);
+            manager.persist(bowling);
 
         } catch (Exception e) {
             e.printStackTrace();

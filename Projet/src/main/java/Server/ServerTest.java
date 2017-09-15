@@ -1,5 +1,7 @@
 package Server;
 
+import jpa.EntityManagerHelper;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,11 +9,11 @@ import java.util.List;
 public class ServerTest {
 
     public static void main(String args[]){
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("dev");
-        EntityManager manager = factory.createEntityManager();
+        EntityManager manager = EntityManagerHelper.getEntityManager();
 
-        EntityTransaction tx = manager.getTransaction();
-        tx.begin();
+
+
+        EntityManagerHelper.beginTransaction();
         try {
 
             Query q1 = manager.createNativeQuery("DELETE FROM USER_ACTIVITY");
@@ -49,17 +51,18 @@ public class ServerTest {
 
             bowling.setUsers(list);
 
-            manager.persist(bowling);
-            manager.persist(jean);
-            manager.persist(paul);
-            manager.persist(jacques);
+            EntityManagerHelper.persist(bowling);
+            EntityManagerHelper.persist(jean);
+            EntityManagerHelper.persist(paul);
+            EntityManagerHelper.persist(jacques);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        tx.commit();
+        EntityManagerHelper.commit();
 
-        manager.close();
-        factory.close();
+        EntityManagerHelper.closeEntityManager();
+        EntityManagerHelper.closeEntityManagerFactory();
 
     }
 }

@@ -11,7 +11,7 @@ import javax.persistence.Query;
  */
 public class UserDAO extends DAO<User>{
 
-    public User find(int id) {
+    public User find(String id) {
 
         Query query= EntityManagerHelper.createQuery("SELECT * FROM User WHERE id = :id");
         query.setParameter("id", id);

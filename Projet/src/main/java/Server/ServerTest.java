@@ -4,6 +4,7 @@ import Server.Model.Activity;
 import Server.Model.User;
 import Server.Repository.ActivityDAO;
 import Server.Repository.DAOFactory;
+import Server.Repository.UserDAO;
 import Server.jpa.EntityManagerHelper;
 
 import javax.persistence.*;
@@ -60,6 +61,9 @@ public class ServerTest {
             bowling.setName("nananananana");
             bowling.setLevel("eeeee");
             activityDAO.update(bowling);
+            DAOFactory.getUserDAO().create(jean);
+            DAOFactory.getUserDAO().create(paul);
+            DAOFactory.getUserDAO().create(jacques);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -16,6 +16,7 @@
  */
 package Server;
 
+import Server.Endpoint.LoginEndpoint;
 import Server.Endpoint.StatusEndpoint;
 
 import javax.ws.rs.core.Application;
@@ -31,6 +32,7 @@ public class TestApplication extends Application {
         final Set<Class<?>> clazzes = new HashSet<Class<?>>();
 
         clazzes.add(StatusEndpoint.class);
+        clazzes.add(LoginEndpoint.class);
 
         return clazzes;
     }

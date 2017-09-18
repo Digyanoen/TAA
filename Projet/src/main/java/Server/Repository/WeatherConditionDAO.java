@@ -12,7 +12,7 @@ import javax.persistence.Query;
 public class WeatherConditionDAO extends DAO<WeatherCondition>{
 
 
-    public WeatherCondition find(int id) {
+    public WeatherCondition find(String id) {
         Query query= EntityManagerHelper.createQuery("SELECT * FROM WEATHERCONDITION WHERE id = :id");
         query.setParameter("id", id);
         return (WeatherCondition) query.getSingleResult();

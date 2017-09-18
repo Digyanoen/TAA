@@ -16,6 +16,8 @@
  */
 package Server;
 
+import Server.Endpoint.StatusEndpoint;
+
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;

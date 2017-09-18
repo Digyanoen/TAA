@@ -4,22 +4,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * Weather POJO
+ */
 @Entity
 public class WeatherCondition {
 
-    int strenght;
+    int strength;
 
     int id;
 
     public WeatherCondition() {
     }
 
-    public int getStrenght() {
-        return strenght;
+    public int getStrength() {
+        return strength;
     }
 
-    public void setStrenght(int strenght) {
-        this.strenght = strenght;
+    public void setStrength(int strenght) {
+        this.strength = strenght;
     }
 
     @Id

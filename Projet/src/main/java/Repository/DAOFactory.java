@@ -6,15 +6,16 @@ package Repository;
  */
 public class DAOFactory {
 
-    private UserDAO userDAO;
-    private ActivityDAO activityDAO;
-    private WeatherConditionDAO weatherConditionDAO;
+    private static UserDAO userDAO;
+    private static  ActivityDAO activityDAO;
+    private static  WeatherConditionDAO weatherConditionDAO;
+
 
     /**
      * Create an UserDAO if userDAO is null
      * @return userDAO
      */
-    public UserDAO getUserDAO() {
+    public static UserDAO getUserDAO() {
         if(userDAO == null)
             userDAO = new UserDAO();
         return userDAO;
@@ -24,7 +25,7 @@ public class DAOFactory {
      * Create an ActivityDAO if activityDAO is null
      * @return ActivityDAO
      */
-    public ActivityDAO getActivityDAO() {
+    public static ActivityDAO getActivityDAO() {
         if(activityDAO == null)
             activityDAO = new ActivityDAO();
         return activityDAO;
@@ -34,7 +35,7 @@ public class DAOFactory {
      * Create a WeatherConditionDAO if weatherConditionDAO is null
      * @return weatherConditionDAO
      */
-    public WeatherConditionDAO getWeatherConditionDAO() {
+    public static WeatherConditionDAO getWeatherConditionDAO() {
         if(weatherConditionDAO == null)
             weatherConditionDAO = new WeatherConditionDAO();
         return weatherConditionDAO;

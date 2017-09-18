@@ -1,6 +1,8 @@
 package Server;
 
 import Repository.ActivityDAO;
+import Repository.DAO;
+import Repository.DAOFactory;
 import jpa.EntityManagerHelper;
 
 import javax.persistence.*;
@@ -21,12 +23,12 @@ public class ServerTest {
             Query q2 = manager.createNativeQuery("DELETE FROM WEATHERCONDITION");
             Query q3 = manager.createNativeQuery("DELETE FROM ACTIVITY");
             Query q4 = manager.createNativeQuery("DELETE FROM USER");
-/*
+
             q1.executeUpdate();
             q2.executeUpdate();
             q3.executeUpdate();
             q4.executeUpdate();
-*/
+
             Activity bowling = new Activity();
             bowling.setName("bowling");
             bowling.setLevel("hardcore");
@@ -52,7 +54,7 @@ public class ServerTest {
 
             bowling.setUsers(list);
 
-            ActivityDAO activityDAO = new ActivityDAO();
+            ActivityDAO activityDAO = DAOFactory.getActivityDAO();
             activityDAO.create(bowling);
             bowling.setName("nananananana");
             bowling.setLevel("eeeee");

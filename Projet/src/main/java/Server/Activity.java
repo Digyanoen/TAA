@@ -7,15 +7,22 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.util.List;
 
+/**
+ * Activity POJO
+ */
 @Entity
 public class Activity {
 
+    /** the id **/
     private int id;
 
+    /** the name **/
     private String name;
 
+    /** the level **/
     private String level;
 
+    /** List of users suscribed of this activity **/
     private List<User> users;
 
 

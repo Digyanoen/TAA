@@ -5,21 +5,16 @@ import jpa.EntityManagerHelper;
 
 import javax.persistence.Query;
 
-
+/**
+ * see inheritance doc
+ * @author NFortun
+ */
 public class ActivityDAO extends DAO<Activity>{
 
     public Activity find(int id) {
         Query query= EntityManagerHelper.createQuery("SELECT * FROM Activity WHERE id = :id");
         query.setParameter("id", id);
         return (Activity) query.getSingleResult();
-    }
-
-    public void create(Activity o) {
-        EntityManagerHelper.beginTransaction();
-        EntityManagerHelper.persist(o);
-        EntityManagerHelper.commit();
-        EntityManagerHelper.closeEntityManager();
-
     }
 
     public void delete(Activity o) {
@@ -32,7 +27,7 @@ public class ActivityDAO extends DAO<Activity>{
         query.setParameter("id", o.getId());
         query.setParameter("name", o.getName());
         query.setParameter("level", o.getLevel());
-        int i =query.executeUpdate();
+        query.executeUpdate();
         EntityManagerHelper.commit();
         EntityManagerHelper.closeEntityManager();
     }

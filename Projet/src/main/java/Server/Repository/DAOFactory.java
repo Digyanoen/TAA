@@ -1,4 +1,4 @@
-package Repository;
+package Server.Repository;
 
 /**
  * @author NFortun

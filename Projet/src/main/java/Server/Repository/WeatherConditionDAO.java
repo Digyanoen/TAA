@@ -1,7 +1,7 @@
-package Repository;
+package Server.Repository;
 
-import Server.WeatherCondition;
-import jpa.EntityManagerHelper;
+import Server.Model.WeatherCondition;
+import Server.jpa.EntityManagerHelper;
 
 import javax.persistence.Query;
 

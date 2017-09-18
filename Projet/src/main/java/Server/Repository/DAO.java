@@ -1,6 +1,6 @@
-package Repository;
+package Server.Repository;
 
-import jpa.EntityManagerHelper;
+import Server.jpa.EntityManagerHelper;
 
 /**
  * CRUD methods for DAO class

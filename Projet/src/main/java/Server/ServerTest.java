@@ -1,9 +1,10 @@
 package Server;
 
-import Repository.ActivityDAO;
-import Repository.DAO;
-import Repository.DAOFactory;
-import jpa.EntityManagerHelper;
+import Server.Model.Activity;
+import Server.Model.User;
+import Server.Repository.ActivityDAO;
+import Server.Repository.DAOFactory;
+import Server.jpa.EntityManagerHelper;
 
 import javax.persistence.*;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
-package Repository;
+package Server.Repository;
 
-import Server.User;
-import jpa.EntityManagerHelper;
+import Server.Model.User;
+import Server.jpa.EntityManagerHelper;
 
 import javax.persistence.Query;
 

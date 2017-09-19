@@ -6,14 +6,49 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class InfoMeteo {
-    public int dt;
-    public Donnees main;
-    public List<Meteo> weather;
-    public Nuage clouds;
-    public Vent wind;
+    private int dt;
+    private Donnees main;
+    private List<Meteo> weather;
+    private Nuage clouds;
+    private Vent wind;
 
-    @Override
-    public String toString() {
-        return String.valueOf(dt);
+    public int getDt() {
+        return dt;
+    }
+
+    public void setDt(int dt) {
+        this.dt = dt;
+    }
+
+    public Donnees getMain() {
+        return main;
+    }
+
+    public void setMain(Donnees main) {
+        this.main = main;
+    }
+
+    public List<Meteo> getWeather() {
+        return weather;
+    }
+
+    public void setWeather(List<Meteo> weather) {
+        this.weather = weather;
+    }
+
+    public Nuage getClouds() {
+        return clouds;
+    }
+
+    public void setClouds(Nuage clouds) {
+        this.clouds = clouds;
+    }
+
+    public Vent getWind() {
+        return wind;
+    }
+
+    public void setWind(Vent wind) {
+        this.wind = wind;
     }
 }

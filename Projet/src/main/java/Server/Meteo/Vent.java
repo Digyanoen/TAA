@@ -1,6 +1,6 @@
 package Server.Meteo;
 
 public class Vent {
-    public double speed;
-    public double deg;
+    private double speed;
+    private double deg;
 }

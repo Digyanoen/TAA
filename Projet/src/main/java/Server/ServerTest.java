@@ -20,7 +20,7 @@ public class ServerTest {
 
       //  EntityManagerHelper.beginTransaction();
         try {
-
+/*
             Query q1 = manager.createNativeQuery("DELETE FROM USER_ACTIVITY");
             Query q2 = manager.createNativeQuery("DELETE FROM WEATHERCONDITION");
             Query q3 = manager.createNativeQuery("DELETE FROM ACTIVITY");
@@ -30,13 +30,18 @@ public class ServerTest {
             q2.executeUpdate();
             q3.executeUpdate();
             q4.executeUpdate();
-
+*/
             Activity bowling = new Activity();
             bowling.setName("bowling");
             bowling.setLevel("hardcore");
+            Activity sport = new Activity();
+            sport.setName("volley");
+            sport.setLevel("nul");
+
 
             List<Activity> slist= new ArrayList<Activity>();
             slist.add(bowling);
+            slist.add(sport);
 
             User jean = new User();
             User paul = new User();
@@ -55,15 +60,15 @@ public class ServerTest {
             list.add(paul);
 
             bowling.setUsers(list);
+            sport.setUsers(list);
 
-            ActivityDAO activityDAO = DAOFactory.getActivityDAO();
-            activityDAO.create(bowling);
-            bowling.setName("nananananana");
-            bowling.setLevel("eeeee");
-            activityDAO.update(bowling);
+
+            DAOFactory.getActivityDAO().create(bowling);
+            DAOFactory.getActivityDAO().create(sport);
             DAOFactory.getUserDAO().create(jean);
             DAOFactory.getUserDAO().create(paul);
             DAOFactory.getUserDAO().create(jacques);
+
 
         } catch (Exception e) {
             e.printStackTrace();

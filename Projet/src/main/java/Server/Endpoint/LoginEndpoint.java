@@ -10,8 +10,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.ParamConverter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 @Path("/login")
@@ -26,11 +28,14 @@ public class LoginEndpoint {
     }
 
     @GET
-    @Path("/activities-{id}")
+    @Path("/activities-{login}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Activity> getActivities(@PathParam("id") String id){
-        User user = DAOFactory.getUserDAO().find(id);
-        return user.getActivities();
+    public List<ActivityName> getActivities(@PathParam("login") String login){
+        User user = DAOFactory.getUserDAO().find(login);
+        List<ActivityName> list = new ArrayList<ActivityName>();
+        for (Activity a: user.getActivities()) list.add(new ActivityName(a.getName()));
+        return list;
+
 
     }
 }

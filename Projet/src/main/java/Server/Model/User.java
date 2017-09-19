@@ -6,8 +6,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
-
+@XmlRootElement
 @Entity
 public class User {
 

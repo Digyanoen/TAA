@@ -12,7 +12,7 @@ public abstract class DAO<T> {
      * @param id the id of the object
      * @return the object
      */
-    public abstract T find(String id);
+    public abstract T find(int id);
 
     /**
      * Delete the object o of his table

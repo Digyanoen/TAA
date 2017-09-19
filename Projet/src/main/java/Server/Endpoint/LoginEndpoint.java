@@ -28,14 +28,27 @@ public class LoginEndpoint {
     }
 
     @GET
-    @Path("/activities-{login}")
+    @Path("/activities-{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ActivityName> getActivities(@PathParam("login") String login){
-        User user = DAOFactory.getUserDAO().find(login);
-        List<ActivityName> list = new ArrayList<ActivityName>();
-        for (Activity a: user.getActivities()) list.add(new ActivityName(a.getName()));
+    public List<String> getActivities(@PathParam("id") int id){
+        User user = DAOFactory.getUserDAO().find(id);
+        List<String> list = new ArrayList<String>();
+        for (Activity a: user.getActivities()) list.add((a.getName()));
         return list;
+    }
+
+    @GET
+    @Path("/activity/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, String> getActivityDetails(@PathParam("id") int id) {
+        Activity activity = DAOFactory.getActivityDAO().find(id);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("name", activity.getName());
+        map.put("level", activity.getLevel());
+        return map;
 
 
     }
+
+
 }

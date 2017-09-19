@@ -1,10 +1,7 @@
 package Server.Model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
@@ -56,7 +53,7 @@ public class Activity {
         this.level = level;
     }
 
-    @ManyToMany(mappedBy = "activities")
+    @ManyToMany(mappedBy = "activities", fetch = FetchType.LAZY)
     public List<User> getUsers() {
         return users;
     }

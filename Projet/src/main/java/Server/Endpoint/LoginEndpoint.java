@@ -27,6 +27,11 @@ public class LoginEndpoint {
         return Response.status(Response.Status.OK).entity("JO").build();
     }
 
+    /**
+     * Retrieve all acitivities for a specified user
+     * @param id the id of the user
+     * @return the list of activities
+     */
     @GET
     @Path("/activities-{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -37,6 +42,11 @@ public class LoginEndpoint {
         return list;
     }
 
+    /**
+     * Retrieve an activity by its id
+     * @param id the id of the activity
+     * @return the name and the level of the activity
+     */
     @GET
     @Path("/activity/{id}")
     @Produces(MediaType.APPLICATION_JSON)

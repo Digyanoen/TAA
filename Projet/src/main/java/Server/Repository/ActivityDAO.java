@@ -11,8 +11,8 @@ import javax.persistence.Query;
  */
 public class ActivityDAO extends DAO<Activity>{
 
-    public Activity find(String id) {
-        Query query= EntityManagerHelper.createQuery("SELECT * FROM Activity WHERE id = :id");
+    public Activity find(int id) {
+        Query query= EntityManagerHelper.createQuery("SELECT activity FROM Activity as activity WHERE id = :id");
         query.setParameter("id", id);
         return (Activity) query.getSingleResult();
     }

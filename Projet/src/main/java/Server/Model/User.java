@@ -1,16 +1,14 @@
 package Server.Model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 @XmlRootElement
 @Entity
 public class User {
+
+    private int id;
 
     private String login;
 
@@ -19,6 +17,15 @@ public class User {
     private List<Activity> activities;
 
     @Id
+    @GeneratedValue
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getLogin() {
         return login;
     }

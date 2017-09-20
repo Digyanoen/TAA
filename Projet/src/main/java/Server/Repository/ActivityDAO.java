@@ -1,34 +1,12 @@
 package Server.Repository;
 
 import Server.Model.Activity;
-import Server.jpa.EntityManagerHelper;
-
-import javax.persistence.Query;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * see inheritance doc
  * @author NFortun
  */
-public class ActivityDAO extends DAO<Activity>{
+public interface ActivityDAO extends JpaRepository<Activity, Integer> {
 
-    public Activity find(int id) {
-        Query query= EntityManagerHelper.createQuery("SELECT activity FROM Activity as activity WHERE id = :id");
-        query.setParameter("id", id);
-        return (Activity) query.getSingleResult();
-    }
-
-    public void delete(Activity o) {
-    }
-
-    public void update(Activity o) {
-        EntityManagerHelper.beginTransaction();
-        Query query= EntityManagerHelper.createQuery(
-                "UPDATE Activity SET  name = :name, level = :level WHERE id = :id");
-        query.setParameter("id", o.getId());
-        query.setParameter("name", o.getName());
-        query.setParameter("level", o.getLevel());
-        query.executeUpdate();
-        EntityManagerHelper.commit();
-        EntityManagerHelper.closeEntityManager();
-    }
 }

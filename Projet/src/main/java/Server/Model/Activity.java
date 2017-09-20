@@ -1,6 +1,8 @@
 package Server.Model;
 
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.List;
  */
 @XmlRootElement
 @Entity
+@Component
 public class Activity {
 
     /** the id **/
@@ -23,6 +26,7 @@ public class Activity {
 
     /** List of users suscribed of this activity **/
     private List<User> users;
+
 
 
     public Activity() {

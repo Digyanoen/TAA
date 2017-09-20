@@ -2,8 +2,9 @@ package Server.Endpoint;
 
 import Server.Model.Activity;
 import Server.Model.User;
-import Server.Repository.DAOFactory;
+import Server.Repository.DaoFactory;
 
+import javax.annotation.Resource;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -18,6 +19,9 @@ import java.util.logging.Logger;
 
 @Path("/login")
 public class LoginEndpoint {
+
+    @Resource
+    private DaoFactory daoFactory;
 
     private static final Logger logger = Logger.getLogger(LoginEndpoint.class.getName());
 
@@ -36,7 +40,7 @@ public class LoginEndpoint {
     @Path("/activities-{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<String> getActivities(@PathParam("id") int id){
-        User user = DAOFactory.getUserDAO().find(id);
+        User user = daoFactory.getUserDAO().findOne(id);
         List<String> list = new ArrayList<String>();
         for (Activity a: user.getActivities()) list.add((a.getName()));
         return list;
@@ -51,7 +55,7 @@ public class LoginEndpoint {
     @Path("/activity/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Map<String, String> getActivityDetails(@PathParam("id") int id) {
-        Activity activity = DAOFactory.getActivityDAO().find(id);
+        Activity activity = daoFactory.getActivityDAO().findOne(id);
         Map<String, String> map = new HashMap<String, String>();
         map.put("name", activity.getName());
         map.put("level", activity.getLevel());

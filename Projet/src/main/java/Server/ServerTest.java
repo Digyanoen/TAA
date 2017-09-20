@@ -2,35 +2,21 @@ package Server;
 
 import Server.Model.Activity;
 import Server.Model.User;
-import Server.Repository.ActivityDAO;
-import Server.Repository.DAOFactory;
-import Server.Repository.UserDAO;
-import Server.jpa.EntityManagerHelper;
+import Server.Repository.DaoFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ServerTest {
 
-    public static void main(String args[]){
-        EntityManager manager = EntityManagerHelper.getEntityManager();
+    @Autowired
+    public DaoFactory daoFactory;
 
 
+    public void run(String... args){
 
-      //  EntityManagerHelper.beginTransaction();
-        try {
-/*
-            Query q1 = manager.createNativeQuery("DELETE FROM USER_ACTIVITY");
-            Query q2 = manager.createNativeQuery("DELETE FROM WEATHERCONDITION");
-            Query q3 = manager.createNativeQuery("DELETE FROM ACTIVITY");
-            Query q4 = manager.createNativeQuery("DELETE FROM USER");
 
-            q1.executeUpdate();
-            q2.executeUpdate();
-            q3.executeUpdate();
-            q4.executeUpdate();
-*/
             Activity bowling = new Activity();
             bowling.setName("bowling");
             bowling.setLevel("hardcore");
@@ -63,22 +49,13 @@ public class ServerTest {
             sport.setUsers(list);
 
 
-            DAOFactory.getActivityDAO().create(bowling);
-            DAOFactory.getActivityDAO().create(sport);
-            DAOFactory.getUserDAO().create(jean);
-            DAOFactory.getUserDAO().create(paul);
-            DAOFactory.getUserDAO().create(jacques);
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        EntityManagerHelper.closeEntityManagerFactory();
-        /*EntityManagerHelper.commit();
-
-        EntityManagerHelper.closeEntityManager();
-        EntityManagerHelper.closeEntityManagerFactory(); */
+            daoFactory.getActivityDAO().save(bowling);
+            daoFactory.getActivityDAO().save(sport);
+            daoFactory.getUserDAO().save(jean);
+            daoFactory.getUserDAO().save(paul);
+            daoFactory.getUserDAO().save(jacques);
 
     }
+
+
 }

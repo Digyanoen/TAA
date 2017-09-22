@@ -5,18 +5,25 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+/**
+ * Entity which represents an user in database
+ */
 @Entity
 @Table(name = "users")
 public class User {
-
+    /** the id */
     private int id;
 
+    /** the login */
     private String login;
 
+    /** the password */
     private String password;
 
+    /** email adress */
     private String email;
 
+    /** activities practiced by the user */
     private List<Activity> activities;
 
     public User (String email, String login, String password){

@@ -12,9 +12,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class WeatherCondition {
 
-    int strength;
+    private int strength;
 
-    int id;
+    private int id;
 
     public WeatherCondition() {
     }

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * see inheritance doc
+ * Activity controller for CRUD operations on an activity
  * @author NFortun
  */
 @Controller

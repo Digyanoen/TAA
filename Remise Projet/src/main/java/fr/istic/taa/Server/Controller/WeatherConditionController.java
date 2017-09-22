@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * see inheritance doc
+ * Weather Controller for CRUD operations on a weather conditions
  * @author NFortun
  */
 @Controller

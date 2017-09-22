@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.*;
 
 import fr.istic.taa.Server.Model.User;
 
-
-import javax.websocket.server.PathParam;
-
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
+/**
+ *  Rest Controller for CRUD action on anuser
+ */
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
+  /** user's DAO */
   @Autowired
   private UserDao userDao;
 
@@ -88,6 +88,5 @@ public class UserController {
     return "User succesfully updated!";
   }
 
-  // Private fields
 
 }

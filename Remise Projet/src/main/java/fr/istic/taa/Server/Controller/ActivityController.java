@@ -1,20 +1,13 @@
 package fr.istic.taa.Server.Controller;
 
 import fr.istic.taa.Server.Model.Activity;
-import fr.istic.taa.Server.Model.User;
 import fr.istic.taa.Server.Repository.ActivityDAO;
-import fr.istic.taa.Server.Repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.annotation.Resource;
-import javax.websocket.server.PathParam;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Activity controller for CRUD operations on an activity
@@ -27,8 +20,6 @@ public class ActivityController{
     @Autowired
     private ActivityDAO activityDAO;
 
-    @Autowired
-    private UserDao userDao;
 
 
     @RequestMapping("/create")

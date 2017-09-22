@@ -65,6 +65,7 @@ public class WeatherConditionController{
     @ResponseBody
     public String update(@RequestBody WeatherCondition o){
         try {
+            weatherConditionDAO.save(o);
         }
         catch (Exception ex) {
             return "Error updating the weather: " + ex.toString();

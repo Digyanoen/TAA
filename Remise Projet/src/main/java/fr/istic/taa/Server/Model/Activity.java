@@ -4,6 +4,7 @@ package fr.istic.taa.Server.Model;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
@@ -41,6 +42,7 @@ public class Activity {
         this.id = id;
     }
 
+    @NotNull
     public String getName() {
         return name;
     }
@@ -49,6 +51,7 @@ public class Activity {
         this.name = name;
     }
 
+    @NotNull
     public String getLevel() {
         return level;
     }

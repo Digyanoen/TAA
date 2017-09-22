@@ -16,31 +16,32 @@ public class WeatherConditionController{
 
     @RequestMapping("/create")
     @ResponseBody
-    public String create(){
-        String userId = "";
+    public String create(int strength){
+        String weatherId;
         try {
-            WeatherCondition activity = new WeatherCondition();
-            WeatherConditionDAO.save(activity);
-            userId = String.valueOf(activity.getId());
+            WeatherCondition weather= new WeatherCondition();
+            weather.setStrength(strength);
+            WeatherConditionDAO.save(weather);
+            weatherId = String.valueOf(weather.getId());
         }
         catch (Exception ex) {
-            return "Error creating the user: " + ex.toString();
+            return "Error creating the weather: " + ex.toString();
         }
-        return "User succesfully created with id = " + userId;
+        return "Weather succesfully created with id = " + weatherId;
     }
 
     @RequestMapping("/find")
     @ResponseBody
     public String find(int id){
-        String userId = "";
+        String weatherId;
         try {
             WeatherCondition activity = WeatherConditionDAO.findOne(id);
-            userId = String.valueOf(activity.getId());
+            weatherId = String.valueOf(activity.getId());
         }
         catch (Exception ex) {
-            return "User not found";
+            return "Weather not found";
         }
-        return "The user id is: " + userId;
+        return "The weather id is: " + weatherId;
     }
 
     @RequestMapping("/delete")
@@ -50,9 +51,9 @@ public class WeatherConditionController{
             WeatherConditionDAO.delete(o);
         }
         catch (Exception ex) {
-            return "Error deleting the user:" + ex.toString();
+            return "Error deleting the weather:" + ex.toString();
         }
-        return "User succesfully deleted!";
+        return "Weather succesfully deleted!";
     }
 
     @RequestMapping("/update")
@@ -61,9 +62,9 @@ public class WeatherConditionController{
         try {
         }
         catch (Exception ex) {
-            return "Error updating the user: " + ex.toString();
+            return "Error updating the weather: " + ex.toString();
         }
-        return "User succesfully updated!";
+        return "Weather succesfully updated!";
     }
 
     @Autowired

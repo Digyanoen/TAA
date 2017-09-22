@@ -2,6 +2,7 @@ package fr.istic.taa.Server.Model;
 // Imports ...
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -18,10 +19,10 @@ public class User {
 
     private List<Activity> activities;
 
-    public User (String email, String login){
+    public User (String email, String login, String password){
         this.email = email;
         this.login = login;
-        this.password = "0000";
+        this.password = password;
     }
 
     public User(int id) {
@@ -41,6 +42,7 @@ public class User {
         this.id = id;
     }
 
+
     public String getLogin() {
         return login;
     }
@@ -49,6 +51,7 @@ public class User {
         this.login = login;
     }
 
+
     public String getPassword() {
         return password;
     }
@@ -56,6 +59,7 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
     public String getEmail() {
         return email;

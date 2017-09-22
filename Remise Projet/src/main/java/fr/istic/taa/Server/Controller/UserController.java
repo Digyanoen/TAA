@@ -3,27 +3,37 @@ package fr.istic.taa.Server.Controller;
 import fr.istic.taa.Server.Repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import fr.istic.taa.Server.Model.User;
 
+
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 @Controller
+@RequestMapping("/user")
 public class UserController {
+
+  @Autowired
+  private UserDao userDao;
+
 
   /**
    * GET /create  --> Create a new user and save it in the database.
    */
-  @RequestMapping("/create")
+  @RequestMapping(method= RequestMethod.POST, value = "/create", consumes = "application/json")
   @ResponseBody
-  public String create(String email, String name) {
-    String userId = "";
+  public String create(@RequestBody User user) {
+    String userId;
     try {
-      User user = new User(email, name);
       userDao.save(user);
       userId = String.valueOf(user.getId());
     }
     catch (Exception ex) {
+      ex.printStackTrace();
       return "Error creating the user: " + ex.toString();
     }
     return "User succesfully created with id = " + userId;
@@ -32,11 +42,12 @@ public class UserController {
   /**
    * GET /delete  --> Delete the user having the passed id.
    */
-  @RequestMapping("/delete")
+  @RequestMapping(method = POST, value="/delete", consumes ="application/json")
   @ResponseBody
-  public String delete(int id) {
+  public String delete(@RequestBody  int id) {
+    System.err.println("id ----------- "+id);
     try {
-      User user = new User(id);
+      User user = userDao.findOne(id);
       userDao.delete(user);
     }
     catch (Exception ex) {
@@ -51,8 +62,8 @@ public class UserController {
    */
   @RequestMapping("/get-by-email")
   @ResponseBody
-  public String getByEmail(String email) {
-    String userId = "";
+  public String getByEmail(  String email) {
+    String userId;
     try {
       User user = userDao.findByEmail(email);
       userId = String.valueOf(user.getId());
@@ -69,11 +80,8 @@ public class UserController {
    */
   @RequestMapping("/update")
   @ResponseBody
-  public String updateUser(int id, String email, String name) {
+  public String updateUser(@RequestBody User user) {
     try {
-      User user = userDao.findOne(id);
-      user.setEmail(email);
-      user.setLogin(name);
       userDao.save(user);
     }
     catch (Exception ex) {
@@ -84,7 +92,4 @@ public class UserController {
 
   // Private fields
 
-  @Autowired
-  private UserDao userDao;
-  
 }

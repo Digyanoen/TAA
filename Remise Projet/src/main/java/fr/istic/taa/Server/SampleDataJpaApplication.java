@@ -14,6 +14,8 @@ package fr.istic.taa.Server;/*
  * limitations under the License.
  */
 
+import fr.istic.taa.Server.Meteo.JSonHandler;
+import fr.istic.taa.Server.Meteo.MeteoHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -25,7 +27,9 @@ public class SampleDataJpaApplication {
     }
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(SampleDataJpaApplication.class, args);
+		//SpringApplication.run(SampleDataJpaApplication.class, args);
+		MeteoHandler met =JSonHandler.getMeteoPinPoint(48,1);
+		//met.list.forEach(e -> System.out.println("date" +e.getDt() +"\n clouds "+e.getClouds()));
 	}
 
 }

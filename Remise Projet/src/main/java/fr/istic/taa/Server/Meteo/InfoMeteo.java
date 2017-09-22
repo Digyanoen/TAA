@@ -51,4 +51,6 @@ public class InfoMeteo {
     public void setWind(Vent wind) {
         this.wind = wind;
     }
+
+
 }

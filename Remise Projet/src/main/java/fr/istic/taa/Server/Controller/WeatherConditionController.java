@@ -4,6 +4,8 @@ import fr.istic.taa.Server.Model.WeatherCondition;
 import fr.istic.taa.Server.Repository.WeatherConditionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -14,14 +16,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class WeatherConditionController{
 
+    @Autowired
+    private WeatherConditionDAO weatherConditionDAO;
+
     @RequestMapping("/create")
     @ResponseBody
-    public String create(int strength){
+    public String create(@RequestBody int strength){
         String weatherId;
         try {
             WeatherCondition weather= new WeatherCondition();
             weather.setStrength(strength);
-            WeatherConditionDAO.save(weather);
+            weatherConditionDAO.save(weather);
             weatherId = String.valueOf(weather.getId());
         }
         catch (Exception ex) {
@@ -30,12 +35,12 @@ public class WeatherConditionController{
         return "Weather succesfully created with id = " + weatherId;
     }
 
-    @RequestMapping("/find")
+    @RequestMapping("/find/{id}")
     @ResponseBody
-    public String find(int id){
+    public String find(@PathVariable("id")  int id){
         String weatherId;
         try {
-            WeatherCondition activity = WeatherConditionDAO.findOne(id);
+            WeatherCondition activity = weatherConditionDAO.findOne(id);
             weatherId = String.valueOf(activity.getId());
         }
         catch (Exception ex) {
@@ -44,11 +49,11 @@ public class WeatherConditionController{
         return "The weather id is: " + weatherId;
     }
 
-    @RequestMapping("/delete")
+    @RequestMapping("/delete/{id}")
     @ResponseBody
-    public String delete(WeatherCondition o){
+    public String delete(@PathVariable("id") int id){
         try {
-            WeatherConditionDAO.delete(o);
+            weatherConditionDAO.delete(weatherConditionDAO.findOne(id));
         }
         catch (Exception ex) {
             return "Error deleting the weather:" + ex.toString();
@@ -58,7 +63,7 @@ public class WeatherConditionController{
 
     @RequestMapping("/update")
     @ResponseBody
-    public String update(WeatherCondition o){
+    public String update(@RequestBody WeatherCondition o){
         try {
         }
         catch (Exception ex) {
@@ -67,29 +72,4 @@ public class WeatherConditionController{
         return "Weather succesfully updated!";
     }
 
-    @Autowired
-    private WeatherConditionDAO WeatherConditionDAO;
-
-    /*public WeatherCondition find(int id) {
-        Query query= EntityManagerHelper.createQuery("SELECT weather FROM WEATHERCONDITION as weather WHERE id = :id");
-        query.setParameter("id", id);
-        return (WeatherCondition) query.getSingleResult();
-    }
-
-
-
-    public void delete(WeatherCondition o) {
-
-    }
-
-    public void update(WeatherCondition o) {
-        EntityManagerHelper.beginTransaction();
-        Query query= EntityManagerHelper.createQuery(
-                "UPDATE WEATHERCONDITION SET  strength = :strength WHERE id = :id");
-        query.setParameter("id", o.getId());
-        query.setParameter("strength", o.getStrength());
-        query.executeUpdate();
-        EntityManagerHelper.commit();
-        EntityManagerHelper.closeEntityManager();
-    }*/
 }

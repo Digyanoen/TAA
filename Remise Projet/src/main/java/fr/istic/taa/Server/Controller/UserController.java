@@ -3,13 +3,12 @@ package fr.istic.taa.Server.Controller;
 import fr.istic.taa.Server.Repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import fr.istic.taa.Server.Model.User;
 
+
+import javax.websocket.server.PathParam;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -42,10 +41,9 @@ public class UserController {
   /**
    * GET /delete  --> Delete the user having the passed id.
    */
-  @RequestMapping(method = POST, value="/delete", consumes ="application/json")
+  @RequestMapping(value="/delete/{id}")
   @ResponseBody
-  public String delete(@RequestBody  int id) {
-    System.err.println("id ----------- "+id);
+  public String delete(@PathVariable("id") int id) {
     try {
       User user = userDao.findOne(id);
       userDao.delete(user);
@@ -62,7 +60,7 @@ public class UserController {
    */
   @RequestMapping("/get-by-email")
   @ResponseBody
-  public String getByEmail(  String email) {
+  public String getByEmail(String email) {
     String userId;
     try {
       User user = userDao.findByEmail(email);

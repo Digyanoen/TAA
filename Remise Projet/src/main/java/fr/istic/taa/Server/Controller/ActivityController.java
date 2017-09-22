@@ -6,10 +6,13 @@ import fr.istic.taa.Server.Repository.ActivityDAO;
 import fr.istic.taa.Server.Repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,43 +33,36 @@ public class ActivityController{
 
     @RequestMapping("/create")
     @ResponseBody
-    public String create(String name, String level, int userId){
+    public String create(@RequestBody  Activity activity){
 
         try {
-            Activity activity = new Activity();
-            activity.setName(name);
-            activity.setLevel(level);
-            List<User> users = activity.getUsers();
-            if(users == null) users = new ArrayList<User>();
-            users.add(userDao.findOne(userId));
-            activity.setUsers(users);
             activityDAO.save(activity);
         }
         catch (Exception ex) {
             return "Error creating the activity: " + ex.toString();
         }
-        return "Activity succesfully created with id = " + userId;
+        return "Activity succesfully created with id = " + activity.getId();
     }
 
-    @RequestMapping("/find")
+    @RequestMapping("/find/{id}")
     @ResponseBody
-    public String find(int id){
-        String userId;
+    public String find(@PathVariable("id") int id){
+        String activityId;
         try {
             Activity activity = activityDAO.findOne(id);
-            userId = String.valueOf(activity.getId());
+            activityId = String.valueOf(activity.getId());
         }
         catch (Exception ex) {
             return "Activity not found";
         }
-        return "The activity id is: " + userId;
+        return "The activity id is: " + activityId;
     }
 
-    @RequestMapping("/delete")
+    @RequestMapping("/delete/{id}")
     @ResponseBody
-    public String delete(Activity o){
+    public String delete(@PathVariable("id") int id){
         try {
-            activityDAO.delete(o);
+            activityDAO.delete(activityDAO.findOne(id));
         }
         catch (Exception ex) {
             return "Error deleting the activity:" + ex.toString();
@@ -76,7 +72,7 @@ public class ActivityController{
 
     @RequestMapping("/update")
     @ResponseBody
-    public String update(Activity o){
+    public String update(@RequestBody Activity o){
         try {
             activityDAO.save(o);
         }

@@ -33,7 +33,7 @@ public class User {
     }
 
     @Id
-    @GeneratedValue(strategy=GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     public int getId() {
         return id;
     }
@@ -42,7 +42,7 @@ public class User {
         this.id = id;
     }
 
-
+    @NotNull
     public String getLogin() {
         return login;
     }
@@ -51,7 +51,7 @@ public class User {
         this.login = login;
     }
 
-
+    @NotNull
     public String getPassword() {
         return password;
     }
@@ -60,7 +60,7 @@ public class User {
         this.password = password;
     }
 
-
+    @NotNull
     public String getEmail() {
         return email;
     }

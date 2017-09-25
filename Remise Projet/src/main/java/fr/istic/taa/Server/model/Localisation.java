@@ -1,7 +1,5 @@
-package fr.istic.taa.Server.Model;
+package fr.istic.taa.Server.model;
 
-
-import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

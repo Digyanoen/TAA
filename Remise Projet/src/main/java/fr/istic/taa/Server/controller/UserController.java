@@ -1,11 +1,11 @@
-package fr.istic.taa.Server.Controller;
+package fr.istic.taa.Server.controller;
 
-import fr.istic.taa.Server.Repository.UserDao;
+import fr.istic.taa.Server.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import fr.istic.taa.Server.Model.User;
+import fr.istic.taa.Server.model.User;
 
 /**
  *  Rest Controller for CRUD action on anuser

@@ -1,6 +1,6 @@
-package fr.istic.taa.Server.Repository;
+package fr.istic.taa.Server.repository;
 
-import fr.istic.taa.Server.Model.WeatherCondition;
+import fr.istic.taa.Server.model.Activity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,6 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @author NFortun
  */
 @Transactional
-public interface WeatherConditionDAO extends JpaRepository<WeatherCondition, Integer> {
+public interface ActivityDAO extends JpaRepository<Activity, Integer> {
 
 }

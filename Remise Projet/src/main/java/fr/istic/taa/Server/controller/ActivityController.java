@@ -1,7 +1,7 @@
-package fr.istic.taa.Server.Controller;
+package fr.istic.taa.Server.controller;
 
-import fr.istic.taa.Server.Model.Activity;
-import fr.istic.taa.Server.Repository.ActivityDAO;
+import fr.istic.taa.Server.model.Activity;
+import fr.istic.taa.Server.repository.ActivityDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

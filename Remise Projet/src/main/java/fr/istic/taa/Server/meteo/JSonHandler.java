@@ -1,4 +1,4 @@
-package fr.istic.taa.Server.Meteo;
+package fr.istic.taa.Server.meteo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

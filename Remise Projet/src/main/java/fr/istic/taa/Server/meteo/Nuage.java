@@ -1,4 +1,4 @@
-package fr.istic.taa.Server.Meteo;
+package fr.istic.taa.Server.meteo;
 
 public class Nuage {
     private int all;

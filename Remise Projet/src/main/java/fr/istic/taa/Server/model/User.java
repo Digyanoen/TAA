@@ -1,4 +1,4 @@
-package fr.istic.taa.Server.Model;
+package fr.istic.taa.Server.model;
 // Imports ...
 
 import javax.persistence.*;

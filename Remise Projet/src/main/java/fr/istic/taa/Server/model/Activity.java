@@ -1,11 +1,8 @@
-package fr.istic.taa.Server.Model;
+package fr.istic.taa.Server.model;
 
-
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 /**

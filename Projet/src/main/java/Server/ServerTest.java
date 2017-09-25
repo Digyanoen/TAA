@@ -13,6 +13,10 @@ public class ServerTest {
     @Autowired
     public DaoFactory daoFactory;
 
+    public ServerTest(){
+
+    }
+
 
     public void run(String... args){
 

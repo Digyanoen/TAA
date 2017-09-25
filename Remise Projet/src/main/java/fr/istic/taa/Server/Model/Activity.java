@@ -11,9 +11,8 @@ import java.util.List;
 /**
  * Activity POJO
  */
-@XmlRootElement
 @Entity
-@Component
+@Table(name = "activity")
 public class Activity {
 
     /** the id **/
@@ -29,11 +28,10 @@ public class Activity {
     private List<User> users;
 
 
+    public Activity() {}
 
-    public Activity() {
-    }
     @Id
-    @GeneratedValue(strategy=GenerationType.TABLE)
+    @GeneratedValue
     public int getId() {
         return id;
     }

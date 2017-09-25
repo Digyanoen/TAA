@@ -12,9 +12,11 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class WeatherCondition {
 
-    private int strength;
+    int strength;
 
-    private int id;
+    String name;
+
+    int id;
 
     public WeatherCondition() {
     }
@@ -29,12 +31,21 @@ public class WeatherCondition {
     }
 
     @Id
-    @GeneratedValue(strategy= GenerationType.TABLE)
+    @GeneratedValue
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @NotNull
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

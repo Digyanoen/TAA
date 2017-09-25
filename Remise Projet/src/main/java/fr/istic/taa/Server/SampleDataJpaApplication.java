@@ -14,22 +14,24 @@ package fr.istic.taa.Server;/*
  * limitations under the License.
  */
 
-import fr.istic.taa.Server.meteo.JSonHandler;
-import fr.istic.taa.Server.meteo.MeteoHandler;
+import fr.istic.taa.Server.Meteo.JSonHandler;
+import fr.istic.taa.Server.Meteo.MeteoHandler;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SampleDataJpaApplication {
-
-	public void run(String ... args){
-
-    }
+public class SampleDataJpaApplication implements ApplicationRunner{
 
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(SampleDataJpaApplication.class, args);
-		//MeteoHandler met =JSonHandler.getMeteoPinPoint(48,1);
-		//met.list.forEach(e -> System.out.println("date" +e.getDt() +"\n clouds "+e.getClouds()));
 	}
 
+    @Override
+    public void run(ApplicationArguments applicationArguments) throws Exception {
+
+        System.out.println("test");
+        new JSonHandler().buildCityID();
+    }
 }

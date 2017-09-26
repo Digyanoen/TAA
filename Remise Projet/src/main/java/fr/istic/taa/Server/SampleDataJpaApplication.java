@@ -14,8 +14,7 @@ package fr.istic.taa.Server;/*
  * limitations under the License.
  */
 
-import fr.istic.taa.Server.Meteo.JSonHandler;
-import fr.istic.taa.Server.Meteo.MeteoHandler;
+import fr.istic.taa.Server.meteo.JSonHandler;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;

@@ -35,10 +35,10 @@ public class JSonHandler {
         List<City> cities;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            cities = mapper.readValue(new File("city.list.json"), new TypeReference<List<City>>(){});
+         /*   cities = mapper.readValue(new File("city.list.json"), new TypeReference<List<City>>(){});
             for(City city : cities){
                 cityDAO.save(city);
-            }
+            }*/
         } catch (Exception e) {
             e.printStackTrace();
         }

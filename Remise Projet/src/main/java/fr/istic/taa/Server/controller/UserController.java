@@ -54,23 +54,7 @@ public class UserController {
     return "User succesfully deleted!";
   }
   
-  /**
-   * GET /get-by-email  --> Return the id for the user having the passed
-   * email.
-   */
-  @RequestMapping("/get-by-email")
-  @ResponseBody
-  public String getByEmail(String email) {
-    String userId;
-    try {
-      User user = userDao.findByEmail(email);
-      userId = String.valueOf(user.getId());
-    }
-    catch (Exception ex) {
-      return "User not found";
-    }
-    return "The user id is: " + userId;
-  }
+
   
   /**
    * GET /update  --> Update the email and the name for the user in the 

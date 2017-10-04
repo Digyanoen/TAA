@@ -37,16 +37,15 @@ public class ActivityController{
 
     @RequestMapping("/find/{id}")
     @ResponseBody
-    public String find(@PathVariable("id") int id){
-        String activityId;
+    public Activity find(@PathVariable("id") int id){
+        Activity activity = null;
         try {
-            Activity activity = activityDAO.findOne(id);
-            activityId = String.valueOf(activity.getId());
+            activity = activityDAO.findOne(id);
         }
         catch (Exception ex) {
-            return "Activity not found";
+            ex.printStackTrace();
         }
-        return "The activity id is: " + activityId;
+        return activity;
     }
 
     @RequestMapping("/delete/{id}")

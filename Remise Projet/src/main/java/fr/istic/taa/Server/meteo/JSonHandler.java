@@ -6,12 +6,14 @@ import fr.istic.taa.Server.model.City;
 import fr.istic.taa.Server.repository.CityDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.File;
 import java.net.URL;
 import java.util.List;
 
 @Controller
+@RequestMapping("/foo")
 public class JSonHandler {
 
     private static final String APPID = "bfdd02437030a6c26f0802d118987170";
@@ -30,8 +32,8 @@ public class JSonHandler {
         return met;
     }
 
-    @Autowired
-    public void buildCityID(){
+    @RequestMapping("/test")
+    public void buildCityID() {
         List<City> cities;
         try {
             ObjectMapper mapper = new ObjectMapper();

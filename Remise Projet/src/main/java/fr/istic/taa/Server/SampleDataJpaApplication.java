@@ -31,6 +31,6 @@ public class SampleDataJpaApplication implements ApplicationRunner{
     public void run(ApplicationArguments applicationArguments) throws Exception {
 
         System.out.println("test");
-        new JSonHandler().buildCityID();
+
     }
 }

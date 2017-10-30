@@ -19,7 +19,11 @@ public class Activity {
     private String name;
 
     /** the level **/
-    private String level;
+    private int level;
+
+    private City city;
+
+    private WeatherCondition weatherCondition;
 
     /** List of users suscribed of this activity **/
     private List<User> users;
@@ -28,7 +32,7 @@ public class Activity {
     public Activity() {}
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
     public int getId() {
         return id;
     }
@@ -47,11 +51,11 @@ public class Activity {
     }
 
     @NotNull
-    public String getLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(int level) {
         this.level = level;
     }
 
@@ -63,4 +67,27 @@ public class Activity {
     public void setUsers(List<User> users) {
         this.users = users;
     }
+
+    @ManyToOne
+    @JoinTable( name = "ACTIVITY_CITY"  ,
+            joinColumns = @JoinColumn(name ="ACTIVITY_ID"),
+            inverseJoinColumns = @JoinColumn(name ="CITY_ID"))
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    @OneToOne
+    public WeatherCondition getWeatherCondition() {
+        return weatherCondition;
+    }
+
+    public void setWeatherCondition(WeatherCondition weatherCondition) {
+        this.weatherCondition = weatherCondition;
+    }
 }
+
+

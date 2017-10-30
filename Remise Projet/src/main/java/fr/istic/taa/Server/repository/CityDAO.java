@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-public interface CityDAO extends JpaRepository<City, Long> {
+public interface CityDAO extends JpaRepository<City, Integer> {
 
 }

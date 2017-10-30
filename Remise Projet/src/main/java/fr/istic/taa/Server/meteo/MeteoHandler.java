@@ -1,19 +1,26 @@
 package fr.istic.taa.Server.meteo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import fr.istic.taa.Server.model.User;
+import fr.istic.taa.Server.model.WeatherCondition;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.mail.*;
+import javax.mail.internet.MimeMessage;
+import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MeteoHandler {
-    public List<InfoMeteo> list;
+    private String METEOMAIL = "noreplytaaproject@gmail.com";
+    private String PASSWORD = "TAAspring";
+    private List<InfoMeteo> list;
 
     public MeteoHandler() {
         this.list = new ArrayList<InfoMeteo>();
     }
 
-    public InfoMeteo getInfoByTimestamp(int ts) throws InterruptedException {
+    private InfoMeteo meteo;
+
+    private InfoMeteo getInfoByTimestamp(long ts) throws InterruptedException {
         for (InfoMeteo im: list){
             if (im.getDt() == ts){
                 return im;
@@ -24,13 +31,13 @@ public class MeteoHandler {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public class InfoMeteo {
-        private int dt;
+        private long dt;
         private Donnees main;
         private List<Meteo> weather;
         private Nuage clouds;
         private Vent wind;
 
-        public int getDt() {
+        public long getDt() {
             return dt;
         }
 
@@ -143,6 +150,63 @@ public class MeteoHandler {
             public double sea_level;
             public double grnd_level;
             public double humidity;
+        }
+    }
+
+    public boolean isOk(WeatherCondition weatherCondition) throws InterruptedException {
+        Calendar cal = Calendar.getInstance();
+        Date date = new Date();
+        cal.setTime(date);
+        cal.add(Calendar.DATE, 4);
+            if(meteo == null) meteo = getInfoByTimestamp(cal.getTimeInMillis());
+
+        switch (weatherCondition.getCondition()) {
+            case WIND:
+                return meteo.getWind().speed < weatherCondition.getStrength();
+            case CLOUD:
+                return meteo.getClouds().all < weatherCondition.getStrength();
+            default:
+                return false;
+
+        }
+
+    }
+
+    public void sendForecast(List<User> users, String msg){
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        props.setProperty("mail.smtp.starttls.enable", "true");
+        Session session = Session.getInstance(props);
+
+        MimeMessage message = new MimeMessage(session);
+        try {
+            message.setText(msg);
+            message.setSubject("Forecast for the weekend");
+            for(User u : users)message.addRecipients(Message.RecipientType.CC, u.getEmail());
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        Transport transport = null;
+        try {
+            transport= session.getTransport("smtp");
+            transport.connect(METEOMAIL, PASSWORD);
+            transport.sendMessage(message, message.getAllRecipients()
+            );
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(transport != null){
+                    transport.close();
+                }
+            }catch (MessagingException e){
+                e.printStackTrace();
+
+            }
         }
     }
 }

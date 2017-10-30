@@ -40,7 +40,7 @@ public class User {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
     public int getId() {
         return id;
     }

@@ -1,11 +1,22 @@
 package fr.istic.taa.Server.controller;
 
+import fr.istic.taa.Server.meteo.JSonHandler;
+import fr.istic.taa.Server.meteo.MeteoHandler;
+import fr.istic.taa.Server.model.Activity;
+import fr.istic.taa.Server.model.City;
+import fr.istic.taa.Server.model.WeatherCondition;
+import fr.istic.taa.Server.repository.ActivityDAO;
+import fr.istic.taa.Server.repository.CityDAO;
 import fr.istic.taa.Server.repository.UserDao;
+import fr.istic.taa.Server.repository.WeatherConditionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import fr.istic.taa.Server.model.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *  Rest Controller for CRUD action on anuser
@@ -19,6 +30,15 @@ public class UserController {
   @Autowired
   private UserDao userDao;
 
+  @Autowired
+  private JSonHandler jSonHandler;
+
+  @Autowired
+  private CityDAO cityDAO;
+
+  @Autowired
+  private WeatherConditionDAO weatherConditionDAO;
+
 
   /**
    * GET /create  --> Create a new user and save it in the database.
@@ -28,6 +48,7 @@ public class UserController {
   public String create(@RequestBody User user) {
     String userId;
     try {
+
       userDao.save(user);
       userId = String.valueOf(user.getId());
     }
@@ -70,6 +91,20 @@ public class UserController {
       return "Error updating the user: " + ex.toString();
     }
     return "User succesfully updated!";
+  }
+
+  @RequestMapping("/check")
+  public void check(){
+    List<User> users = userDao.findAll();
+
+    for(User u : users){
+      for(Activity a : u.getActivities()){
+        MeteoHandler met =jSonHandler.getMeteoPinPoint(cityDAO.findOne(a.getId()));
+        WeatherCondition weather =weatherConditionDAO.findOne(a.getLevel());
+        //met.isOk(weather) send mail
+
+      }
+    }
   }
 
 

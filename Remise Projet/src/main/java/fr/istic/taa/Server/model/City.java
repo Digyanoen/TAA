@@ -1,29 +1,30 @@
 package fr.istic.taa.Server.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import fr.istic.taa.Server.model.Activity;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Table(name = "city")
 public class City{
-    private double id;
+    private int id;
 
     private String name;
 
-    private String country;
+    private String country = "FR";
+
+    private List<Activity> activity = new ArrayList<Activity>();
 
     @Id
-    public double getId() {
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    public int getId() {
         return id;
     }
 
-    public void setId(double id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -42,6 +43,16 @@ public class City{
     public void setCountry(String country) {
         this.country = country;
     }
+
+    @OneToMany(mappedBy = "city")
+    public List<Activity> getActivity() {
+        return activity;
+    }
+
+    public void setActivity(List<Activity> activity) {
+        this.activity = activity;
+    }
+
 }
 
 

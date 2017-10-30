@@ -18,7 +18,7 @@ public class Localisation {
     private int lon;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
     public int getId() {
         return id;
     }

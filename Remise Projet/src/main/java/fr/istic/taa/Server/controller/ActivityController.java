@@ -1,13 +1,20 @@
 package fr.istic.taa.Server.controller;
 
-import fr.istic.taa.Server.model.Activity;
+import fr.istic.taa.Server.model.*;
 import fr.istic.taa.Server.repository.ActivityDAO;
+import fr.istic.taa.Server.repository.CityDAO;
+import fr.istic.taa.Server.repository.UserDao;
+import fr.istic.taa.Server.repository.WeatherConditionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Activity controller for CRUD operations on an activity
@@ -17,16 +24,42 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/activity")
 public class ActivityController{
 
-    @Autowired
+    @Resource
     private ActivityDAO activityDAO;
+
+    @Resource
+    private CityDAO cityDAO;
+
+    @Resource
+    private UserDao userDao;
+
+    @Resource
+    private WeatherConditionDAO weatherConditionDAO;
 
 
 
     @RequestMapping("/create")
     @ResponseBody
-    public String create(@RequestBody  Activity activity){
+    public String create(@RequestBody Request request){
+
+        Activity activity = request.getActivity();
+        City city = cityDAO.findOne(request.getCity().getId());
+
+        WeatherCondition weatherCondition= new WeatherCondition();
+        weatherCondition.setStrength(request.getWeatherCondition().getStrength());
+        weatherCondition.setCondition(request.getWeatherCondition().getCondition());
+        activity.setWeatherCondition(weatherCondition);
+
+        if(city == null) {
+            city = new City();
+            city.setCountry(request.getCity().getCountry());
+            city.setName(request.getCity().getName());
+        }
+        city.getActivity().add(activity);
 
         try {
+            cityDAO.save(city);
+            weatherConditionDAO.save(weatherCondition);
             activityDAO.save(activity);
         }
         catch (Exception ex) {
@@ -70,6 +103,23 @@ public class ActivityController{
             return "Error updating the activity: " + ex.toString();
         }
         return "Activity succesfully updated!";
+    }
+
+    @RequestMapping("/suscribe")
+    @ResponseBody
+    public String set(String ActivityId, String UserId){
+
+        int actId = Integer.parseInt(ActivityId);
+        int uId = Integer.parseInt(UserId);
+        Activity activity = activityDAO.findOne(actId);
+        User user = userDao.findOne(uId);
+        List list =user.getActivities();
+        if(list == null){
+            list = new ArrayList<Activity>();
+        }
+        list.add(activity);
+        userDao.save(user);
+        return "Activité ajouté";
     }
 
 }

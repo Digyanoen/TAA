@@ -1,5 +1,6 @@
 package fr.istic.taa.Server.controller;
 
+import fr.istic.taa.Server.Request.ActivityRequest;
 import fr.istic.taa.Server.model.*;
 import fr.istic.taa.Server.repository.ActivityDAO;
 import fr.istic.taa.Server.repository.CityDAO;
@@ -40,20 +41,20 @@ public class ActivityController{
 
     @RequestMapping("/create")
     @ResponseBody
-    public String create(@RequestBody Request request){
+    public String create(@RequestBody ActivityRequest request){
 
-        Activity activity = request.getActivity();
-        City city = cityDAO.findOne(request.getCity().getId());
+        Activity activity = new Activity();
+        City city = cityDAO.findOne(request.getCityId());
 
         WeatherCondition weatherCondition= new WeatherCondition();
-        weatherCondition.setStrength(request.getWeatherCondition().getStrength());
-        weatherCondition.setCondition(request.getWeatherCondition().getCondition());
+        weatherCondition.setStrength(request.getStrength());
+        weatherCondition.setCondition(WeatherEnum.valueOf(request.getCondition()));
         activity.setWeatherCondition(weatherCondition);
 
         if(city == null) {
             city = new City();
-            city.setCountry(request.getCity().getCountry());
-            city.setName(request.getCity().getName());
+            city.setCountry(request.getCityCountry());
+            city.setName(request.getCityName());
         }
         city.getActivity().add(activity);
 

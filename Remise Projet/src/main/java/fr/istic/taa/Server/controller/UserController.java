@@ -1,5 +1,6 @@
 package fr.istic.taa.Server.controller;
 
+import fr.istic.taa.Server.Request.UserRequest;
 import fr.istic.taa.Server.meteo.JSonHandler;
 import fr.istic.taa.Server.meteo.MeteoHandler;
 import fr.istic.taa.Server.model.Activity;
@@ -45,8 +46,12 @@ public class UserController {
    */
   @RequestMapping(method= RequestMethod.POST, value = "/create", consumes = "application/json")
   @ResponseBody
-  public String create(@RequestBody User user) {
+  public String create(@RequestBody UserRequest userRequest) {
     String userId;
+    User user = new User();
+    user.setEmail(userRequest.getMail());
+    user.setLogin(userRequest.getLogin());
+    user.setPassword(userRequest.getPassword());
     try {
 
       userDao.save(user);

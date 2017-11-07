@@ -1,6 +1,8 @@
 package fr.istic.taa.Server.controller;
 
+import fr.istic.taa.Server.Request.WeatherConditionRequest;
 import fr.istic.taa.Server.model.WeatherCondition;
+import fr.istic.taa.Server.model.WeatherEnum;
 import fr.istic.taa.Server.repository.WeatherConditionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,11 +24,12 @@ public class WeatherConditionController{
 
     @RequestMapping("/create")
     @ResponseBody
-    public String create(@RequestBody int strength){
+    public String create(@RequestBody WeatherConditionRequest weatherConditionRequest){
         String weatherId;
         try {
             WeatherCondition weather= new WeatherCondition();
-            weather.setStrength(strength);
+            weather.setStrength(weatherConditionRequest.getStrength());
+            weather.setCondition(WeatherEnum.valueOf(weatherConditionRequest.getChoice()));
             weatherConditionDAO.save(weather);
             weatherId = String.valueOf(weather.getId());
         }

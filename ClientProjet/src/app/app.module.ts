@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -19,7 +20,8 @@ import { LoginRoutingModule } from './login/login-routing.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LoginRoutingModule
+    LoginRoutingModule,
+    HttpModule
   ],
   providers: [ActivityService],
   bootstrap: [AppComponent]

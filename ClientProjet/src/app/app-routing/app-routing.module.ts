@@ -16,13 +16,12 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [AuthGuard],
-    children: [{
-      path: '',
-      canActivateChild: [AuthGuard],
-      children: [
-        { path: 'new-activity',  component: ActivityCreationComponent }]
-    }]
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'new-activity',
+    component: ActivityCreationComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

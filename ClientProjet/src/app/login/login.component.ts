@@ -13,8 +13,10 @@ import { AuthService } from '../app-routing/auth.service';
 })
 export class LoginComponent {
   message: string;
+  pseudo: string;
+  mdp: string;
 
-  constructor(public authService: AuthService, public router: Router) {
+  constructor( public authService: AuthService, public router: Router) {
     this.setMessage();
   }
 
@@ -25,17 +27,10 @@ export class LoginComponent {
   login() {
     this.message = 'Trying to log in ...';
 
-    this.authService.login().subscribe(() => {
-      this.setMessage();
-      if (this.authService.isLoggedIn) {
-        // Get the redirect URL from our auth service
-        // If no redirect has been set, use the default
-        const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/crisis-center/admin';
+    this.pseudo = 'loul';
+    this.mdp = '0000';
 
-        // Redirect the user
-        this.router.navigate([redirect]);
-      }
-    });
+    this.authService.login(this.pseudo, this.mdp, 'test');
   }
 
   logout() {

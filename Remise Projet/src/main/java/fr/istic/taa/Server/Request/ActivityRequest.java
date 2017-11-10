@@ -8,24 +8,24 @@ public class ActivityRequest {
 
     private String condition;
 
-    private String cityName;
+    private int userId;
 
-    private String cityCountry;
+    private String name;
 
-    public String getCityName() {
-        return cityName;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public String getCityCountry() {
-        return cityCountry;
+    public String getName() {
+        return name;
     }
 
-    public void setCityCountry(String cityCountry) {
-        this.cityCountry = cityCountry;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getStrength() {

@@ -1,9 +1,6 @@
 package fr.istic.taa.Server.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -14,7 +11,7 @@ public class WeatherCondition {
 
     private int strength;
 
-    private WeatherEnum condition;
+    private WeatherEnum name;
 
     private int id;
 
@@ -41,11 +38,12 @@ public class WeatherCondition {
     }
 
     @NotNull
-    public WeatherEnum getCondition() {
-        return condition;
+    @Enumerated
+    public WeatherEnum getName() {
+        return name;
     }
 
-    public void setCondition(WeatherEnum condition) {
-        this.condition = condition;
+    public void setName(WeatherEnum condition) {
+        this.name = condition;
     }
 }

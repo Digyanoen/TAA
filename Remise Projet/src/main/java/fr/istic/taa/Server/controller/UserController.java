@@ -1,23 +1,16 @@
 package fr.istic.taa.Server.controller;
 
+import fr.istic.taa.Server.Request.LoginRequest;
+import fr.istic.taa.Server.Request.LoginResponse;
 import fr.istic.taa.Server.Request.UserRequest;
 import fr.istic.taa.Server.meteo.JSonHandler;
-import fr.istic.taa.Server.meteo.MeteoHandler;
-import fr.istic.taa.Server.model.Activity;
-import fr.istic.taa.Server.model.City;
-import fr.istic.taa.Server.model.WeatherCondition;
-import fr.istic.taa.Server.repository.ActivityDAO;
+import fr.istic.taa.Server.model.User;
 import fr.istic.taa.Server.repository.CityDAO;
 import fr.istic.taa.Server.repository.UserDao;
 import fr.istic.taa.Server.repository.WeatherConditionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import fr.istic.taa.Server.model.User;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *  Rest Controller for CRUD action on anuser
@@ -98,18 +91,18 @@ public class UserController {
     return "User succesfully updated!";
   }
 
-  @RequestMapping("/check")
-  public void check(){
-    List<User> users = userDao.findAll();
 
-    for(User u : users){
-      for(Activity a : u.getActivities()){
-        MeteoHandler met =jSonHandler.getMeteoPinPoint(cityDAO.findOne(a.getId()));
-        WeatherCondition weather =weatherConditionDAO.findOne(a.getLevel());
-        //met.isOk(weather) send mail
+  @RequestMapping("/login")
+  public LoginResponse login(LoginRequest loginRequest){
+    User user = userDao.findByLoginAndPassword(loginRequest.getLogin(), loginRequest.getPassword());
+    if(user == null) return null;
 
-      }
-    }
+    LoginResponse response = new LoginResponse();
+    response.setId(user.getId());
+    response.setLogin(user.getLogin());
+    return response;
+
+
   }
 
 

@@ -29,7 +29,7 @@ public class WeatherConditionController{
         try {
             WeatherCondition weather= new WeatherCondition();
             weather.setStrength(weatherConditionRequest.getStrength());
-            weather.setCondition(WeatherEnum.valueOf(weatherConditionRequest.getChoice()));
+            weather.setName(WeatherEnum.valueOf(weatherConditionRequest.getChoice()));
             weatherConditionDAO.save(weather);
             weatherId = String.valueOf(weather.getId());
         }

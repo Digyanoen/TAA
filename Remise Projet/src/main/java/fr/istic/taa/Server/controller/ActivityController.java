@@ -6,7 +6,6 @@ import fr.istic.taa.Server.repository.ActivityDAO;
 import fr.istic.taa.Server.repository.CityDAO;
 import fr.istic.taa.Server.repository.UserDao;
 import fr.istic.taa.Server.repository.WeatherConditionDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,23 +44,32 @@ public class ActivityController{
 
         Activity activity = new Activity();
         City city = cityDAO.findOne(request.getCityId());
+        User user = userDao.findOne(request.getUserId());
 
         WeatherCondition weatherCondition= new WeatherCondition();
         weatherCondition.setStrength(request.getStrength());
-        weatherCondition.setCondition(WeatherEnum.valueOf(request.getCondition()));
-        activity.setWeatherCondition(weatherCondition);
+        weatherCondition.setName(WeatherEnum.valueOf(request.getCondition()));
 
-        if(city == null) {
-            city = new City();
-            city.setCountry(request.getCityCountry());
-            city.setName(request.getCityName());
-        }
+        activity.setWeatherCondition(weatherCondition);
+        activity.setName(request.getName());
+        activity.setCity(city);
+
+        List<User> users = new ArrayList<User>();
+        users.add(user);
+        activity.setUsers(users);
+
+        List<Activity> activities = new ArrayList<Activity>();
+        activities.add(activity);
+        user.setActivities(activities);
+
         city.getActivity().add(activity);
+
 
         try {
             cityDAO.save(city);
             weatherConditionDAO.save(weatherCondition);
             activityDAO.save(activity);
+            userDao.save(user);
         }
         catch (Exception ex) {
             return "Error creating the activity: " + ex.toString();
@@ -69,24 +77,29 @@ public class ActivityController{
         return "Activity succesfully created with id = " + activity.getId();
     }
 
-    @RequestMapping("/find/{id}")
+    @RequestMapping("/list/{id}")
     @ResponseBody
-    public Activity find(@PathVariable("id") int id){
-        Activity activity = null;
+    public List<Activity> find(@PathVariable("id") int id){
+
+        List<Activity> activities = null;
         try {
-            activity = activityDAO.findOne(id);
+            activities = userDao.findOne(id).getActivities();
         }
         catch (Exception ex) {
             ex.printStackTrace();
         }
-        return activity;
+        return activities;
     }
 
     @RequestMapping("/delete/{id}")
     @ResponseBody
     public String delete(@PathVariable("id") int id){
         try {
-            activityDAO.delete(activityDAO.findOne(id));
+            Activity activity = activityDAO.findOne(id);
+            for(User u : activity.getUsers()){
+                u.getActivities().remove(activity);
+            }
+            activityDAO.delete(activity);
         }
         catch (Exception ex) {
             return "Error deleting the activity:" + ex.toString();
@@ -94,33 +107,33 @@ public class ActivityController{
         return "Activity succesfully deleted!";
     }
 
-    @RequestMapping("/update")
-    @ResponseBody
-    public String update(@RequestBody Activity o){
-        try {
-            activityDAO.save(o);
-        }
-        catch (Exception ex) {
-            return "Error updating the activity: " + ex.toString();
-        }
-        return "Activity succesfully updated!";
-    }
+//    @RequestMapping("/update")
+//    @ResponseBody
+//    public String update(@RequestBody Activity o){
+//        try {
+//            activityDAO.save(o);
+//        }
+//        catch (Exception ex) {
+//            return "Error updating the activity: " + ex.toString();
+//        }
+//        return "Activity succesfully updated!";
+//    }
 
-    @RequestMapping("/suscribe")
-    @ResponseBody
-    public String set(String ActivityId, String UserId){
-
-        int actId = Integer.parseInt(ActivityId);
-        int uId = Integer.parseInt(UserId);
-        Activity activity = activityDAO.findOne(actId);
-        User user = userDao.findOne(uId);
-        List list =user.getActivities();
-        if(list == null){
-            list = new ArrayList<Activity>();
-        }
-        list.add(activity);
-        userDao.save(user);
-        return "Activité ajouté";
-    }
+//    @RequestMapping("/suscribe")
+//    @ResponseBody
+//    public String set(String ActivityId, String UserId){
+//
+//        int actId = Integer.parseInt(ActivityId);
+//        int uId = Integer.parseInt(UserId);
+//        Activity activity = activityDAO.findOne(actId);
+//        User user = userDao.findOne(uId);
+//        List list =user.getActivities();
+//        if(list == null){
+//            list = new ArrayList<Activity>();
+//        }
+//        list.add(activity);
+//        userDao.save(user);
+//        return "Activité ajouté";
+//    }
 
 }

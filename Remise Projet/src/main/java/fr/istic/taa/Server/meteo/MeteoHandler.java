@@ -160,7 +160,7 @@ public class MeteoHandler {
         cal.add(Calendar.DATE, 4);
             if(meteo == null) meteo = getInfoByTimestamp(cal.getTimeInMillis());
 
-        switch (weatherCondition.getCondition()) {
+        switch (weatherCondition.getName()) {
             case WIND:
                 return meteo.getWind().speed < weatherCondition.getStrength();
             case CLOUD:

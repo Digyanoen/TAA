@@ -185,7 +185,7 @@ public class MeteoHandler {
         try {
             message.setText(msg);
             message.setSubject("Forecast for the weekend");
-            for(User u : users)message.addRecipients(Message.RecipientType.CC, u.getEmail());
+            for(User u : users)message.addRecipients(Message.RecipientType.BCC, u.getEmail());
 
         } catch (MessagingException e) {
             e.printStackTrace();

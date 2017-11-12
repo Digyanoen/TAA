@@ -23,9 +23,15 @@ export class AuthService {
   constructor(private http: Http) {
   }
 
+  signup(login: string, password: string, mail: string) {
+    return this.http.post('http://localhost:4200/api/user/create', {login, password, mail}, this.headers)
+      .toPromise()
+      .catch(AuthService.handleError);
+  }
+
   login(login: string, password: string) {
     // console.warn(JSON.stringify({login, password}));
-    return this.http.post('http://localhost:4200/api/user/create', {login, password}, this.headers)
+    return this.http.post('http://localhost:4200/api/user/login', {login, password}, this.headers)
       .toPromise()
       .catch(AuthService.handleError);
   }

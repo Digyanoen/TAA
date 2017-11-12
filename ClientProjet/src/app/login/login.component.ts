@@ -6,12 +6,10 @@ import { AuthService } from '../app-routing/auth.service';
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
-  message: string;
   pseudo: string;
   password: string;
 
   constructor( public authService: AuthService, public router: Router) {
-    this.setMessage();
   }
 
   ngOnInit() {
@@ -22,12 +20,8 @@ export class LoginComponent implements OnInit {
     this.authService.redirectUrl = '/';
   }
 
-  setMessage() {
-    this.message = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
-  }
-
   login() {
-    this.message = 'Trying to log in ...';
+    console.warn(this.pseudo);
 
     this.authService.login(this.pseudo, this.password)
       .then(response => {

@@ -11,6 +11,7 @@ import { ActivityService } from './activity/activity.service';
 import { LoginRoutingModule } from './login/login-routing.module';
 import { RegistryComponent } from './registry/registry.component';
 import {FormsModule} from '@angular/forms';
+import {ActivityCreationService} from "./activity-creation/activity-creation.service";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import {FormsModule} from '@angular/forms';
     FormsModule,
     HttpModule
   ],
-  providers: [ActivityService],
+  providers: [ActivityService, ActivityCreationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

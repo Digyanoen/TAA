@@ -1,19 +1,19 @@
 <div>
   <label>Name
     <input [(ngModel)]="name"/>
-  </label>
+  </label><br>
   <label>City
     <select [(ngModel)]="city_id">
       <option *ngFor="let city of cities" [value]="city.id">{{city.city}}</option>
     </select>
-  </label>
+  </label><br>
   <label>Condition
     <select [(ngModel)]="condition.name">
       <option *ngFor="let cond of conditions" [value]="cond">{{cond}}</option>
     </select>
-  </label>
+  </label><br>
   <label>Value
     <input [(ngModel)]="condition.strength"/>
-  </label>
+  </label><br>
   <button (click)="create()">Submit</button>
 </div>

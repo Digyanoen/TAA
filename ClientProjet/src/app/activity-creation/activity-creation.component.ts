@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Condition} from '../models/condition';
 import {City} from '../models/city';
 import {Http} from '@angular/http';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
+import {ActivityCreationService} from './activity-creation.service';
 
 @Component({
   selector: 'app-activity-creation',
@@ -21,14 +22,25 @@ export class ActivityCreationComponent implements OnInit {
   protected condition: Condition;
 
   protected cities: City[];
+  protected conditions: String[];
 
-  constructor(private http: Http, private router: Router) { }
+  constructor(private http: Http, private router: Router, private actcreaservice: ActivityCreationService) { }
 
   ngOnInit() {
     const n_u = JSON.parse(localStorage.getItem('currentUser')).id;
     if (this.user_id !== n_u) {
       this.user_id = n_u;
     }
+    this.actcreaservice.getCities().then(
+      response => {
+        this.cities = JSON.parse(response.text());
+      }
+    );
+    this.actcreaservice.getCondition().then(
+      response => {
+        this.conditions = JSON.parse(response.text());
+      }
+    );
   }
 
   create() {
@@ -38,8 +50,7 @@ export class ActivityCreationComponent implements OnInit {
       city_id: this.city_id,
       condition: this.condition
     };
-    this.http.post('http://localhost:4200/api/activity/create', activity, this.headers)
-      .toPromise().then(_ => {
+    this.actcreaservice.create(activity).then(_ => {
         this.router.navigate(['/activity']);
     });
   }

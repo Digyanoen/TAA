@@ -24,7 +24,7 @@ export class ActivityService {
   constructor(public http: Http) { }
 
   getActivities(user_id) {
-    return this.http.get('http://localhost:4200/api/activity/list' + user_id)
+    return this.http.get('http://localhost:4200/api/activity/list/' + user_id)
       .toPromise()
       .catch(ActivityService.handleError);
   }

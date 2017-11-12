@@ -4,7 +4,7 @@ package fr.istic.taa.Server.Request;
 public class LoginRequest {
 
     private String login;
-    private  String password;
+    private String password;
 
     public String getLogin() {
         return login;

@@ -21,15 +21,15 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.warn(this.pseudo);
 
     this.authService.login(this.pseudo, this.password)
       .then(response => {
         // login successful if there's a jwt token in the response
-        const user = response;
+        console.warn('reponse is : ' + JSON.parse(response.text()));
+        const user = response.text();
         if (user) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(user));
+          localStorage.setItem('currentUser', user);
           this.authService.isLoggedIn = true;
         }
         const redirect: string = this.authService.redirectUrl ? this.authService.redirectUrl : '/activity';

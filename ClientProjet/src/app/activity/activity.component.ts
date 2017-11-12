@@ -15,7 +15,7 @@ export class ActivityComponent implements OnInit {
   constructor(public activityservice: ActivityService) { }
 
   ngOnInit() {
-    console.warn(JSON.parse(localStorage.getItem('currentUser')));
+    console.error(localStorage.getItem('currentUser'));
     const n_u = JSON.parse(localStorage.getItem('currentUser')).id;
     if (this.user_id !== n_u) {
       this.user_id = n_u;

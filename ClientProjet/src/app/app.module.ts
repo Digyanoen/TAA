@@ -5,9 +5,9 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ActivityCreationComponent } from './activity-creation/activity-creation.component';
-import { HomeComponent } from './home/home.component';
+import { ActivityComponent } from './activity/activity.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
-import { ActivityService } from './activity.service';
+import { ActivityService } from './activity/activity.service';
 import { LoginRoutingModule } from './login/login-routing.module';
 
 @NgModule({
@@ -15,7 +15,7 @@ import { LoginRoutingModule } from './login/login-routing.module';
     AppComponent,
     LoginComponent,
     ActivityCreationComponent,
-    HomeComponent
+    ActivityComponent
   ],
   imports: [
     BrowserModule,

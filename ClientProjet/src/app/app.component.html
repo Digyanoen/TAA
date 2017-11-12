@@ -1,5 +1,5 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
+<div style="text-align:center" *ngIf="authService.isLoggedIn">
 <!--  <h1>
     Welcome to {{title}}!
   </h1>
@@ -17,6 +17,6 @@
     <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
   </li>
 </ul>-->
-  <p>Voici la base</p>
-  <router-outlet></router-outlet>
+  <p>Voici la base</p><button (click)="logout()"> Logout</button>
 </div>
+<router-outlet></router-outlet>

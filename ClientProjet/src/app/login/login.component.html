@@ -1,3 +1,11 @@
+<h2>LOGIN</h2>
+<p>{{message}}</p>
 <p>
-  login works!
+  <label>
+    Pseudo <input ngModel="pseudo"/>
+  </label><br/>
+  <label>
+    Mot de passe <input ngModel="password"/>
+  </label><br/>
+  <button (click)="login()"  *ngIf="!authService.isLoggedIn">Login</button>
 </p>

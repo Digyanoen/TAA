@@ -25,7 +25,7 @@ export class AuthService {
 
   login(login: string, password: string) {
     // console.warn(JSON.stringify({login, password}));
-    return this.http.post('http://localhost:4200/user/create', {login, password}, this.headers)
+    return this.http.post('http://localhost:4200/api/user/create', {login, password}, this.headers)
       .toPromise()
       .catch(AuthService.handleError);
   }

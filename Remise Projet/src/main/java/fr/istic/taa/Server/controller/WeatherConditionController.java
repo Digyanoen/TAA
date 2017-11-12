@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author NFortun
  */
 @Controller
-@RequestMapping("/weather-condition")
+@RequestMapping("/api/weather-condition")
 public class WeatherConditionController{
 
     @Autowired

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 
   /** user's DAO */
@@ -94,7 +94,9 @@ public class UserController {
 
   @RequestMapping("/login")
   public LoginResponse login(LoginRequest loginRequest){
-    User user = userDao.findByLoginAndPassword(loginRequest.getLogin(), loginRequest.getPassword());
+    String log = loginRequest.getLogin();
+    String mdp = loginRequest.getPassword();
+    User user = userDao.findByLoginAndPassword(log, mdp);
     if(user == null) return null;
 
     LoginResponse response = new LoginResponse();

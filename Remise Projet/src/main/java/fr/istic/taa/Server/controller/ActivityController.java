@@ -21,7 +21,7 @@ import java.util.List;
  * @author NFortun
  */
 @Controller
-@RequestMapping("/activity")
+@RequestMapping("/api/activity")
 public class ActivityController{
 
     @Resource

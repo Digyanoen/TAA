@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-@RequestMapping("/city")
+@RequestMapping("/api/city")
 public class CityController {
 
     @Autowired

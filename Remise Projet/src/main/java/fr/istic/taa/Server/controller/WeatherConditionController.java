@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * Weather Controller for CRUD operations on a weather conditions
  * @author NFortun
@@ -21,6 +23,12 @@ public class WeatherConditionController{
 
     @Autowired
     private WeatherConditionDAO weatherConditionDAO;
+
+    @RequestMapping
+    @ResponseBody
+    public WeatherEnum[] get(){
+        return WeatherEnum.values();
+    }
 
     @RequestMapping("/create")
     @ResponseBody

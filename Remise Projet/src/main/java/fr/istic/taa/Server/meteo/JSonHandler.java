@@ -1,5 +1,6 @@
 package fr.istic.taa.Server.meteo;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.istic.taa.Server.model.City;
 import fr.istic.taa.Server.repository.CityDAO;
@@ -7,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+import java.io.File;
 import java.net.URL;
 import java.util.List;
 
 @Controller
-@RequestMapping("/foo")
 public class JSonHandler {
 
     private static final String APPID = "bfdd02437030a6c26f0802d118987170";
@@ -30,15 +33,13 @@ public class JSonHandler {
         return met;
     }
 
-    @RequestMapping("/test")
+    @PostConstruct
     public void buildCityID() {
         List<City> cities;
         try {
             ObjectMapper mapper = new ObjectMapper();
-         /*   cities = mapper.readValue(new File("city.list.json"), new TypeReference<List<City>>(){});
-            for(City city : cities){
-                cityDAO.save(city);
-            }*/
+            cities = mapper.readValue(new File("src/main/java/resource/city.smalllist.json"), new TypeReference<List<City>>(){});
+            cityDAO.save(cities);
         } catch (Exception e) {
             e.printStackTrace();
         }

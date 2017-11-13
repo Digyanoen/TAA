@@ -10,7 +10,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "city")
 public class City{
-    private int id;
+    private long id;
 
     private String name;
 
@@ -19,12 +19,12 @@ public class City{
     private List<Activity> activity = new ArrayList<Activity>();
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    public int getId() {
+//    @GeneratedValue(strategy = GenerationType.TABLE)
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

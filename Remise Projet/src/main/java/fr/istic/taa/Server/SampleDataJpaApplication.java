@@ -31,9 +31,6 @@ public class SampleDataJpaApplication implements ApplicationRunner{
 
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
-
-        System.out.println("test");
-
     }
 
 }

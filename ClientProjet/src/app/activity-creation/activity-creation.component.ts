@@ -32,12 +32,12 @@ export class ActivityCreationComponent implements OnInit {
     if (this.user_id !== n_u) {
       this.user_id = n_u;
     }
-    // this.actcreaservice.getCities().then(
-    //   response => {
-    //     this.cities = JSON.parse(response.text());
-    //   }
-    // );
-    this.cities = [{id: 1, city: 'test'}, {id: 2, city: 'test2'}];
+    this.actcreaservice.getCities().then(
+      response => {
+        this.cities = JSON.parse(response.text());
+      }
+    );
+    // this.cities = [{id: 1, city: 'test'}, {id: 2, city: 'test2'}];
     this.actcreaservice.getCondition().then(
       response => {
         this.conditions = JSON.parse(response.text());
@@ -48,9 +48,9 @@ export class ActivityCreationComponent implements OnInit {
 
   create() {
     const activity = {
-      user_id: this.user_id,
+      userId: this.user_id,
       name: this.name,
-      city_id: this.city_id,
+      cityId: this.city_id,
       condition: this.cond_name,
       strength: this.cond_strength
     };

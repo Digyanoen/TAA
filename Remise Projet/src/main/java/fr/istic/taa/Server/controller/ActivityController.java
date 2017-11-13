@@ -83,11 +83,8 @@ public class ActivityController{
 
         List<Activity> activities = null;
         try {
-            System.out.println("YOUHOU1");
             User u = userDao.findOne(id);
-            System.out.println("YOUHOU2");
             activities = u.getActivities();
-            System.out.println();
         }
         catch (Exception ex) {
             ex.printStackTrace();

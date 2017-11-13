@@ -22,7 +22,7 @@ export class ActivityCreationService {
   }
 
   getCondition() {
-    return this.http.get('http://localhost:4200/api/condition')
+    return this.http.get('http://localhost:4200/api/weather-condition')
       .toPromise()
       .catch(ActivityCreationService.handleError);
   }

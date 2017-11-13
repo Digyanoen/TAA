@@ -19,7 +19,7 @@ public class Activity {
     private String name;
 
     /** the level **/
-    private int level;
+//    private int level;
 
     private City city;
 
@@ -50,14 +50,14 @@ public class Activity {
         this.name = name;
     }
 
-    @NotNull
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
+//    @NotNull
+//    public int getLevel() {
+//        return level;
+//    }
+//
+//    public void setLevel(int level) {
+//        this.level = level;
+//    }
 
     @ManyToMany(mappedBy = "activities", fetch = FetchType.LAZY)
     public List<User> getUsers() {
@@ -81,6 +81,7 @@ public class Activity {
     }
 
     @OneToOne
+    @JoinColumn(name = "WEATHER_CONDITION_ID")
     public WeatherCondition getWeatherCondition() {
         return weatherCondition;
     }

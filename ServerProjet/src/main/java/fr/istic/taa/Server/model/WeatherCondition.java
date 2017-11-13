@@ -15,6 +15,8 @@ public class WeatherCondition {
 
     private int id;
 
+    private Activity activity;
+
     public WeatherCondition() {
     }
 
@@ -45,5 +47,14 @@ public class WeatherCondition {
 
     public void setName(WeatherEnum condition) {
         this.name = condition;
+    }
+
+    @OneToOne(mappedBy = "weatherCondition")
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 }

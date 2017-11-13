@@ -5,11 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.istic.taa.Server.model.City;
 import fr.istic.taa.Server.repository.CityDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import java.io.File;
 import java.net.URL;
 import java.util.List;
@@ -38,7 +39,8 @@ public class JSonHandler {
         List<City> cities;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            cities = mapper.readValue(new File("src/main/java/resource/city.smalllist.json"), new TypeReference<List<City>>(){});
+            Resource resource = new ClassPathResource("city.smalllist.json");
+            cities = mapper.readValue(resource.getFile(), new TypeReference<List<City>>(){});
             cityDAO.save(cities);
         } catch (Exception e) {
             e.printStackTrace();

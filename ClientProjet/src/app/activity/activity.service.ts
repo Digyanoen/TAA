@@ -29,5 +29,10 @@ export class ActivityService {
       .catch(ActivityService.handleError);
   }
 
+  deleteActivity(act_id) {
+    return this.http.get('http://localhost:4200/api/activity/list/' + act_id)
+      .toPromise()
+      .catch(ActivityService.handleError);
+  }
 
 }

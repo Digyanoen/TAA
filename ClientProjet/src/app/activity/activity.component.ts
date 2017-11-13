@@ -29,6 +29,6 @@ export class ActivityComponent implements OnInit {
   }
 
   deleteActivity(id: Number) {
-    console.log('Genre ça supprime');
+    this.activityservice.deleteActivity(id);
   }
 }

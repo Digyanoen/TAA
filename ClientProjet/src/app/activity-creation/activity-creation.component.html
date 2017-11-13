@@ -8,12 +8,12 @@
     </select>
   </label><br>
   <label>Condition
-    <select [(ngModel)]="condition.name">
-      <option *ngFor="let cond of conditions" [value]="cond">{{cond}}</option>
+    <select [(ngModel)]="cond_name" >
+      <option *ngFor="let cond of conditions" [ngValue]="cond">{{cond}}</option>
     </select>
   </label><br>
   <label>Value
-    <input [(ngModel)]="condition.strength"/>
+    <input [(ngModel)]="cond_strength"/>
   </label><br>
   <button (click)="create()">Submit</button>
 </div>

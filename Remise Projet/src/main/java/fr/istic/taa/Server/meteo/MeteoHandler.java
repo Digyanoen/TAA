@@ -3,12 +3,15 @@ package fr.istic.taa.Server.meteo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import fr.istic.taa.Server.model.User;
 import fr.istic.taa.Server.model.WeatherCondition;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.mail.*;
 import javax.mail.internet.MimeMessage;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@EnableScheduling
 public class MeteoHandler {
     private String METEOMAIL = "noreplytaaproject@gmail.com";
     private String PASSWORD = "TAAspring";
@@ -209,4 +212,8 @@ public class MeteoHandler {
             }
         }
     }
+
+
+
+
 }

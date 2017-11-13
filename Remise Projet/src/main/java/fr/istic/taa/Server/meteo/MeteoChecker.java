@@ -1,21 +1,22 @@
-package fr.istic.taa.Server.controller;
+package fr.istic.taa.Server.meteo;
 
-import fr.istic.taa.Server.meteo.JSonHandler;
-import fr.istic.taa.Server.meteo.MeteoHandler;
+
 import fr.istic.taa.Server.model.Activity;
 import fr.istic.taa.Server.model.City;
 import fr.istic.taa.Server.model.WeatherCondition;
 import fr.istic.taa.Server.repository.ActivityDAO;
 import fr.istic.taa.Server.repository.CityDAO;
-import org.springframework.stereotype.Controller;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import javax.annotation.Resource;
 import java.util.List;
 
-@Controller
-@RequestMapping("/api/meteo")
-public class MeteoController {
-
+@EnableScheduling
+@Component
+public class MeteoChecker {
 
     @Resource
     private ActivityDAO activityDAO;
@@ -23,12 +24,12 @@ public class MeteoController {
     @Resource
     private CityDAO cityDAO;
 
-    @RequestMapping("/check")
+    @Scheduled(cron = "0 0 * * 2 *")
     public void check() throws InterruptedException {
         JSonHandler jSonHandler = new JSonHandler();
         MeteoHandler meteoHandler;
         WeatherCondition weatherCondition;
-        List <City> cities = cityDAO.findAll();
+        List<City> cities = cityDAO.findAll();
         for(City c : cities){
             meteoHandler = jSonHandler.getMeteoPinPoint(c);
             List<Activity> activities = activityDAO.findActivitiesByCity_Name(c.getName());
@@ -46,9 +47,4 @@ public class MeteoController {
 
 
     }
-
-
-
-
-
 }

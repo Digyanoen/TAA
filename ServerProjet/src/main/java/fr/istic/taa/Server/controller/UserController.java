@@ -40,6 +40,8 @@ public class UserController {
     @RequestMapping(method= RequestMethod.POST, value = "/create", consumes = "application/json")
     @ResponseBody
     public String create(@RequestBody UserRequest userRequest) {
+
+        if(userDao.findByLogin(userRequest.getLogin()) != null) return "Login déjà existant";
         String userId;
         User user = new User();
         user.setEmail(userRequest.getMail());

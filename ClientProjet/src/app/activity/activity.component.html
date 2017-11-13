@@ -2,11 +2,12 @@
   <ul>
     <li *ngFor="let activity of activities">
       {{activity.name}} {{activity.city}} - <button (click)="deleteActivity(activity.id)">X</button>
-      <ul>
-        <li *ngFor="let cond of activity.condition">
-          {{cond.name}} {{cond.strength}}
-        </li>
-      </ul>
+      <!--<ul>-->
+        <!--<li *ngFor="let cond of activity.condition">-->
+          <!--{{cond.name}} {{cond.strength}}-->
+        <!--</li>-->
+      <!--</ul>-->
+      <p>- {{activity.condition_name}} {{activity.condition_strength}}</p>
     </li>
   </ul>
   <button routerLink="/new-activity">Add</button>

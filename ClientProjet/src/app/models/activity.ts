@@ -4,5 +4,7 @@ export class Activity {
   id: number;
   name: string;
   city: string;
-  condition: Condition[];
+  condition_name: string;
+  condition_strength: number;
+  // condition: Condition[];
 }

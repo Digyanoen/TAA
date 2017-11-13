@@ -34,7 +34,9 @@ export class ActivityCreationComponent implements OnInit {
     }
     this.actcreaservice.getCities().then(
       response => {
+        console.warn(response.text());
         this.cities = JSON.parse(response.text());
+        console.warn(this.cities);
       }
     );
     // this.cities = [{id: 1, city: 'test'}, {id: 2, city: 'test2'}];

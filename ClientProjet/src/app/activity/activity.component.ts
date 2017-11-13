@@ -27,7 +27,10 @@ export class ActivityComponent implements OnInit {
     }
   }
 
-  deleteActivity(id: Number) {
-    this.activityservice.deleteActivity(id);
+  deleteActivity(id: number, idx: number) {
+    this.activityservice.deleteActivity(id).then(_ => {
+        this.activities = this.activities.slice(0, idx).concat( this.activities.slice(idx + 1, this.activities.length));
+      }
+    );
   }
 }

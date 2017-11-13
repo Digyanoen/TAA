@@ -30,7 +30,7 @@ export class ActivityService {
   }
 
   deleteActivity(act_id) {
-    return this.http.get('http://localhost:4200/api/activity/list/' + act_id)
+    return this.http.get('http://localhost:4200/api/activity/delete/' + act_id)
       .toPromise()
       .catch(ActivityService.handleError);
   }

@@ -1,7 +1,7 @@
 <div>
   <ul>
-    <li *ngFor="let activity of activities">
-      {{activity.name}} {{activity.city}} - <button (click)="deleteActivity(activity.id)">X</button>
+    <li *ngFor="let activity of activities; let idx = index">
+      {{activity.name}} {{activity.city}} - <button (click)="deleteActivity(activity.id, idx)">X</button>
       <!--<ul>-->
         <!--<li *ngFor="let cond of activity.condition">-->
           <!--{{cond.name}} {{cond.strength}}-->

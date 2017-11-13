@@ -44,7 +44,7 @@ public class City{
         this.country = country;
     }
 
-    @OneToMany(mappedBy = "city")
+    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
     public List<Activity> getActivity() {
         return activity;
     }

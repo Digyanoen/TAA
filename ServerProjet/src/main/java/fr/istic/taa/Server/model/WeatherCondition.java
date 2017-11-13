@@ -49,7 +49,7 @@ public class WeatherCondition {
         this.name = condition;
     }
 
-    @OneToOne(mappedBy = "weatherCondition")
+    @OneToOne(mappedBy = "weatherCondition", fetch = FetchType.LAZY)
     public Activity getActivity() {
         return activity;
     }

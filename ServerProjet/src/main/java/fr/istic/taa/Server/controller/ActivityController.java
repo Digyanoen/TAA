@@ -1,6 +1,7 @@
 package fr.istic.taa.Server.controller;
 
 import fr.istic.taa.Server.Request.ActivityRequest;
+import fr.istic.taa.Server.Request.ActivityResponse;
 import fr.istic.taa.Server.model.*;
 import fr.istic.taa.Server.repository.ActivityDAO;
 import fr.istic.taa.Server.repository.CityDAO;
@@ -62,19 +63,15 @@ public class ActivityController{
         users.add(user);
         activity.setUsers(users);
 
-//        user.addActivity(activity);
+        user.addActivity(activity);
 
 //        city.getActivity().add(activity);
 
 
         try {
-            System.out.println("save activity");
             activityDAO.save(activity);
-            System.out.println("save weather");
             weatherConditionDAO.save(weatherCondition);
-            System.out.println("save city");
             cityDAO.save(city);
-            System.out.println("save user");
             userDao.save(user);
         }
         catch (Exception ex) {
@@ -86,15 +83,12 @@ public class ActivityController{
 
     @RequestMapping("/list/{id}")
     @ResponseBody
-    public List<Activity> find(@PathVariable("id") int id){
+    public List<ActivityResponse> find(@PathVariable("id") int id){
 
-        List<Activity> activities = null;
-        try {
-            User u = userDao.findOne(id);
-            activities = u.getActivities();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
+        List<ActivityResponse> activities  = new ArrayList<>();
+        for(Activity a : userDao.findOne(id).getActivities()){
+            WeatherCondition wc = a.getWeatherCondition();
+            activities.add(new ActivityResponse(a.getId(),a.getName(),a.getCity().getName(),wc.getName(),wc.getStrength()));
         }
         return activities;
     }

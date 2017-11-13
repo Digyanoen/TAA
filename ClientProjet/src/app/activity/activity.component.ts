@@ -15,14 +15,13 @@ export class ActivityComponent implements OnInit {
   constructor(public activityservice: ActivityService) { }
 
   ngOnInit() {
-    console.error(localStorage.getItem('currentUser'));
     const n_u = JSON.parse(localStorage.getItem('currentUser')).id;
     if (this.user_id !== n_u) {
       this.user_id = n_u;
       this.activityservice.getActivities(this.user_id).then(
         response => {
-          this.activities = response;
-          console.warn(this.activities);
+          console.warn(response.text());
+          this.activities = JSON.parse(response.text());
         }
       );
     }

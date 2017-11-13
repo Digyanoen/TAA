@@ -43,12 +43,16 @@ public class ActivityController{
     public String create(@RequestBody ActivityRequest request){
 
         Activity activity = new Activity();
+
+
         City city = cityDAO.findOne(request.getCityId());
         User user = userDao.findOne(request.getUserId());
 
         WeatherCondition weatherCondition= new WeatherCondition();
         weatherCondition.setStrength(request.getStrength());
         weatherCondition.setName(WeatherEnum.valueOf(request.getCondition()));
+
+        weatherConditionDAO.save(weatherCondition);
 
         activity.setWeatherCondition(weatherCondition);
         activity.setName(request.getName());
@@ -58,20 +62,23 @@ public class ActivityController{
         users.add(user);
         activity.setUsers(users);
 
-        List<Activity> activities = new ArrayList<Activity>();
-        activities.add(activity);
-        user.setActivities(activities);
+//        user.addActivity(activity);
 
-        city.getActivity().add(activity);
+//        city.getActivity().add(activity);
 
 
         try {
-            cityDAO.save(city);
-            weatherConditionDAO.save(weatherCondition);
+            System.out.println("save activity");
             activityDAO.save(activity);
+            System.out.println("save weather");
+            weatherConditionDAO.save(weatherCondition);
+            System.out.println("save city");
+            cityDAO.save(city);
+            System.out.println("save user");
             userDao.save(user);
         }
         catch (Exception ex) {
+            System.out.println("ici : " + ex.toString());
             return "Error creating the activity: " + ex.toString();
         }
         return "Activity succesfully created with id = " + activity.getId();

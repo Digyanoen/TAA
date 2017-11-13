@@ -69,9 +69,7 @@ public class Activity {
     }
 
     @ManyToOne
-    @JoinTable( name = "ACTIVITY_CITY"  ,
-            joinColumns = @JoinColumn(name ="ACTIVITY_ID"),
-            inverseJoinColumns = @JoinColumn(name ="CITY_ID"))
+    @JoinColumn(name = "CITY_ID")
     public City getCity() {
         return city;
     }

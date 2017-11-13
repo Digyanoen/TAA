@@ -30,7 +30,7 @@ public class WeatherCondition {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue
     public int getId() {
         return id;
     }

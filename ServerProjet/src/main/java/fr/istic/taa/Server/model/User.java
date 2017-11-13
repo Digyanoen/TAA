@@ -90,5 +90,5 @@ public class User {
         this.activities = activities;
     }
 
-    public void addSport(Activity activity) { activities.add(activity); }
+    public void addActivity(Activity activity) { activities.add(activity); }
 }
